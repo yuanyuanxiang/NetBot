@@ -1,0 +1,260 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <SccProjectName />
+    <SccLocalPath />
+    <Keyword>MFCProj</Keyword>
+    <ProjectGuid>{F44D3B0A-BC73-47C5-82A2-AA8D98E257CE}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <UseOfMfc>Static</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <UseOfMfc>Static</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.Cpp.UpgradeFromVC60.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.Cpp.UpgradeFromVC60.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <CodeAnalysisRuleSet>NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <GenerateManifest>false</GenerateManifest>
+    <IntDir>$(ProjectDir)$(Configuration)</IntDir>
+    <LibraryPath>$(SolutionDir)Seu_lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir);$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <CodeAnalysisRuleSet>NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <GenerateManifest>false</GenerateManifest>
+    <IntDir>$(ProjectDir)$(Configuration)</IntDir>
+    <LibraryPath>$(SolutionDir)Seu_lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <StringPooling>true</StringPooling>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <Optimization>MaxSpeed</Optimization>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_CRT_SECURE_NO_WARNINGS;ZLIB_WINAPI;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BrowseInformation>true</BrowseInformation>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <WholeProgramOptimization>true</WholeProgramOptimization>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Midl>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <TypeLibraryName>.\Release\NetBot.tlb</TypeLibraryName>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+    </Midl>
+    <ResourceCompile>
+      <Culture>0x0804</Culture>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+    </Bscmake>
+    <Link>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>No</GenerateDebugInformation>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
+      <IgnoreSpecificDefaultLibraries>MSVCRT.lib</IgnoreSpecificDefaultLibraries>
+      <ForceFileOutput>Enabled</ForceFileOutput>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <StringPooling>true</StringPooling>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <Optimization>Disabled</Optimization>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_CRT_SECURE_NO_WARNINGS;ZLIB_WINAPI;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AssemblerListingLocation>.\Release\</AssemblerListingLocation>
+      <BrowseInformation>true</BrowseInformation>
+      <EnableParallelCodeGeneration>true</EnableParallelCodeGeneration>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Midl>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <TypeLibraryName>.\Release\NetBot.tlb</TypeLibraryName>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+    </Midl>
+    <ResourceCompile>
+      <Culture>0x0804</Culture>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+    </Bscmake>
+    <Link>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <SubSystem>Windows</SubSystem>
+      <IgnoreSpecificDefaultLibraries>MSVCRT.lib</IgnoreSpecificDefaultLibraries>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
+      <ForceFileOutput>Enabled</ForceFileOutput>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Seu_lib\Command.cpp" />
+    <ClCompile Include="DDosDlg.cpp" />
+    <ClCompile Include="ExClass\AviFile.cpp" />
+    <ClCompile Include="ExClass\IniFile.cpp" />
+    <ClCompile Include="ExClass\SEU_QQwry.cpp" />
+    <ClCompile Include="ExControl\CmdEdit.cpp" />
+    <ClCompile Include="ExControl\SplashScreenEx.cpp" />
+    <ClCompile Include="ExControl\StatLink.cpp" />
+    <ClCompile Include="ExControl\TrueColorToolBar.cpp" />
+    <ClCompile Include="ExControl\XPictureBox.cpp" />
+    <ClCompile Include="FileDlg.cpp" />
+    <ClCompile Include="FileTranDlg.cpp" />
+    <ClCompile Include="NetBot.cpp" />
+    <ClCompile Include="NetBotDlg.cpp" />
+    <ClCompile Include="ProcessDlg.cpp" />
+    <ClCompile Include="ScreenDlg.cpp" />
+    <ClCompile Include="ServerDlg.cpp" />
+    <ClCompile Include="SetDlg.cpp" />
+    <ClCompile Include="ShellDlg.cpp" />
+    <ClCompile Include="SortList.cpp" />
+    <ClCompile Include="StdAfx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">stdafx.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="UpdateDlg.cpp" />
+    <ClCompile Include="VideoDlg.cpp" />
+    <ClCompile Include="XScreenXor.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="NetBot.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Seu_lib\Command.h" />
+    <ClInclude Include="..\Seu_lib\common.h" />
+    <ClInclude Include="DDosDlg.h" />
+    <ClInclude Include="ExClass\AutoLock.h" />
+    <ClInclude Include="ExClass\AviFile.h" />
+    <ClInclude Include="ExClass\IniFile.h" />
+    <ClInclude Include="ExClass\SEU_QQwry.h" />
+    <ClInclude Include="ExClass\ThreadTemplate.h" />
+    <ClInclude Include="ExControl\CmdEdit.h" />
+    <ClInclude Include="ExControl\SplashScreenEx.h" />
+    <ClInclude Include="ExControl\StatLink.h" />
+    <ClInclude Include="ExControl\TrueColorToolBar.h" />
+    <ClInclude Include="ExControl\XPictureBox.h" />
+    <ClInclude Include="FileDlg.h" />
+    <ClInclude Include="FileTranDlg.h" />
+    <ClInclude Include="NetBot.h" />
+    <ClInclude Include="NetBotDlg.h" />
+    <ClInclude Include="ProcessDlg.h" />
+    <ClInclude Include="Resource.h" />
+    <ClInclude Include="ScreenDlg.h" />
+    <ClInclude Include="ServerDlg.h" />
+    <ClInclude Include="SetDlg.h" />
+    <ClInclude Include="ShellDlg.h" />
+    <ClInclude Include="SortList.h" />
+    <ClInclude Include="StdAfx.h" />
+    <ClInclude Include="UpdateDlg.h" />
+    <ClInclude Include="VideoDlg.h" />
+    <ClInclude Include="XScreenXor.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\bmp00001.bmp" />
+    <Image Include="res\DDOSLogo.bmp" />
+    <Image Include="res\dir.ico" />
+    <Image Include="res\downfile.ico" />
+    <Image Include="res\FileToolBar.bmp" />
+    <Image Include="res\FileToolBarDisable.bmp" />
+    <Image Include="res\FileToolBarHot.bmp" />
+    <Image Include="res\FileToolBarNormal.bmp" />
+    <Image Include="res\folders.bmp" />
+    <Image Include="res\MainToolbar.bmp" />
+    <Image Include="res\NetBot.ico" />
+    <Image Include="res\online.ico" />
+    <Image Include="res\online2.ico" />
+    <Image Include="res\OnLineToolbar.bmp" />
+    <Image Include="res\outlook\config.ico" />
+    <Image Include="res\outlook\ddos.ico" />
+    <Image Include="res\outlook\dos.ico" />
+    <Image Include="res\outlook\exit.ico" />
+    <Image Include="res\outlook\File.ico" />
+    <Image Include="res\outlook\FileTran.ico" />
+    <Image Include="res\outlook\Help.ico" />
+    <Image Include="res\outlook\home.ico" />
+    <Image Include="res\outlook\process.ico" />
+    <Image Include="res\outlook\remote.ico" />
+    <Image Include="res\outlook\screen.ico" />
+    <Image Include="res\outlook\server.ico" />
+    <Image Include="res\outlook\UPDATE.ico" />
+    <Image Include="res\small.ico" />
+    <Image Include="res\toolbar1.bmp" />
+    <Image Include="res\upfile.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="res\NetBot.rc2" />
+    <CustomBuild Include="res\outlook\default1.bin" />
+    <CustomBuild Include="res\outlook\skin1.bin" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="res\xp.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\fsg.exe" />
+    <None Include="res\Skin.ssk" />
+    <None Include="res\upx.exe" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties RESOURCE_FILE="NetBot.rc" />
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

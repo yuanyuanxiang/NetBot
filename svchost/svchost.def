@@ -1,0 +1,4 @@
+LIBRARY	svchost
+
+EXPORTS
+RoutineMain

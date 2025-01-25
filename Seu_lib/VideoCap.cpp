@@ -128,7 +128,6 @@ bool CVideoCap::Initialize()
 
     capDriverGetCaps(m_hWndCap, &gCapDriverCaps, sizeof(CAPDRIVERCAPS));
 
-
     capOverlay(m_hWndCap, FALSE);
     capPreview(m_hWndCap, TRUE); // 选择preview方式占用固定的cpu时间
     capPreviewScale(m_hWndCap, FALSE);

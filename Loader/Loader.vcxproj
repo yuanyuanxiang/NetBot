@@ -48,15 +48,15 @@
     <CodeAnalysisRuleSet>Z:\Program Files (x86)\Microsoft Visual Studio 14.0\Team Tools\Static Analysis Tools\Rule Sets\NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <RunCodeAnalysis>false</RunCodeAnalysis>
     <IntDir>$(ProjectDir)$(Configuration)</IntDir>
-    <IncludePath>$(ProjectDir);$(SolutionDir)Seu_lib;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)Seu_lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir);$(SolutionDir)Seu_lib;$(VLDPATH)\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)Seu_lib;$(VLDPATH)\lib\$(Platform);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <CodeAnalysisRuleSet>Z:\Program Files (x86)\Microsoft Visual Studio 14.0\Team Tools\Static Analysis Tools\Rule Sets\NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <RunCodeAnalysis>false</RunCodeAnalysis>
     <IntDir>$(ProjectDir)$(Configuration)</IntDir>
-    <IncludePath>.;$(SolutionDir)Seu_lib;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)Seu_lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>.;$(SolutionDir)Seu_lib;$(VLDPATH)\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)Seu_lib;$(VLDPATH)\lib\$(Platform);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>

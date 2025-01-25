@@ -45,15 +45,15 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <IntDir>$(ProjectDir)$(Configuration)</IntDir>
-    <IncludePath>.;$(SolutionDir)Seu_lib;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)Seu_lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>.;$(SolutionDir)Seu_lib;$(VLDPATH)\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)Seu_lib;$(VLDPATH)\lib\$(Platform);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <CodeAnalysisRuleSet>NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <IntDir>$(ProjectDir)$(Configuration)</IntDir>
-    <IncludePath>.;$(SolutionDir)Seu_lib;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)Seu_lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>.;$(SolutionDir)Seu_lib;$(VLDPATH)\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)Seu_lib;$(VLDPATH)\lib\$(Platform);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>

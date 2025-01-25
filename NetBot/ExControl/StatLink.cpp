@@ -106,7 +106,7 @@ void CStaticLink::OnLButtonDown(UINT nFlags, CPoint point)
         Invalidate();							// repaint
     } else {
         MessageBeep(0);		// unable to execute file!
-        TRACE(_T("*** WARNING: CStaticLink: unable to navigate link %s\n"),(LPCTSTR)m_link);
+        Mprintf(_T("*** WARNING: CStaticLink: unable to navigate link %s\n"),(LPCTSTR)m_link);
     }
 }
 

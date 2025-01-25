@@ -1,6 +1,11 @@
 #include "Command.h"
 #include "common.h"
 
+#ifndef TRACE
+#include <stdio.h>
+#define TRACE printf
+#endif
+
 //开启TCP保活机制
 BOOL TurnonKeepAlive(SOCKET s, UINT nKeepAliveSec)
 {

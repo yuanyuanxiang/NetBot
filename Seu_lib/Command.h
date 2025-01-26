@@ -7,6 +7,7 @@
 
 #include <winsock2.h>
 #include "mstcpip.h"
+#include "SafeBuffer.h"
 
 // SOCKET buffer max length
 #define BUFFER_MAXLEN		    1024*2
@@ -177,12 +178,12 @@ typedef struct tagMsgHead {
 BOOL TurnonKeepAlive(SOCKET s, UINT nKeepAliveSec);
 
 //发送数据
-BOOL SendData(SOCKET s, char *data, int len);
+BOOL SendData(SOCKET s, const char *data, int len);
 //接收数据
 BOOL RecvData(SOCKET s, char *data, int len);
 //发送消息
-BOOL SendMsg(SOCKET s, char const *pBuf, LPMsgHead lpMsgHead);
+BOOL SendMsg(SOCKET s, SafeBuffer pBuf, LPMsgHead lpMsgHead);
 //接收消息
-BOOL RecvMsg(SOCKET s,char *pBuf, LPMsgHead lpMsgHead);
+BOOL RecvMsg(SOCKET s, SafeBuffer pBuf, LPMsgHead lpMsgHead);
 
 #endif

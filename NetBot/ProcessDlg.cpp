@@ -18,6 +18,7 @@ static char THIS_FILE[] = __FILE__;
 CProcessDlg::CProcessDlg(CWnd* pParent /*=NULL*/)
     : CDialog(CProcessDlg::IDD, pParent)
 {
+    m_Buffer.SafeCheck(128 * 1024);
     m_ConnSocket = INVALID_SOCKET;
     m_hWorkThread = NULL;
 }
@@ -223,7 +224,7 @@ DWORD CProcessDlg::ListProcess()
     //显示获取的进程
     m_ProcessList.DeleteAllItems();
     DWORD dwNum = m_MsgHead.dwSize / sizeof(ProcessInfo);
-    BYTE * m_DesBuf = (LPBYTE)m_Buffer;
+    BYTE * m_DesBuf = (LPBYTE)m_Buffer.c_str();
     LPProcessInfo pInfo = (LPProcessInfo)m_DesBuf;
     for (DWORD i = 0; i < dwNum; i++) {
         //对枚举出错的，ID为0的进行过滤

@@ -22,16 +22,13 @@ CFileDlg::CFileDlg(CWnd* pParent /*=NULL*/) : CDialog(CFileDlg::IDD, pParent)
     bCopySel = FALSE;
     m_ConnSocket = INVALID_SOCKET;
     m_ViewStyle = LVS_REPORT;
-    m_Buffer = new char[2048 * 1024]; //数据交换区 2MB
+    m_Buffer.SafeCheck(2048 * 1024); //数据交换区 2MB
     m_hWorkThread = NULL;
 }
 
 CFileDlg::~CFileDlg()
 {
     imgListTree.DeleteImageList();
-
-    if (m_Buffer != NULL)
-        delete[]m_Buffer;
 }
 
 void CFileDlg::DoDataExchange(CDataExchange* pDX)
@@ -281,7 +278,7 @@ DWORD CFileDlg::ListDriver()
     m_FileList.DeleteAllItems();
 
     DWORD dwNum = m_MsgHead.dwSize / sizeof(DriverInfo);
-    BYTE* m_DesBuf = (LPBYTE)m_Buffer;
+    BYTE* m_DesBuf = (LPBYTE)m_Buffer.c_str();
     LPDriverInfo pInfo = (LPDriverInfo)m_DesBuf;
     int iImage = 0, iSelectedImage = 0;
     HTREEITEM hTreeRoot = m_FileTree.GetRootItem();
@@ -372,7 +369,7 @@ DWORD CFileDlg::ListDirectory()
     m_FileList.DeleteAllItems();
 
     DWORD dwNum = m_MsgHead.dwSize / sizeof(FileInfo);
-    BYTE* m_DesBuf = (LPBYTE)m_Buffer;
+    BYTE* m_DesBuf = (LPBYTE)m_Buffer.c_str();
     LPFileInfo pInfo = (LPFileInfo)m_DesBuf;
 
     for (DWORD i = 0; i < dwNum; i++) {

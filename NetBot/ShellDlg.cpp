@@ -19,6 +19,7 @@ static char THIS_FILE[] = __FILE__;
 CShellDlg::CShellDlg(CWnd* pParent /*=NULL*/)
     : CDialog(CShellDlg::IDD, pParent)
 {
+    m_Buffer.SafeCheck(512 * 1024);
     m_strCmdLine = _T("");
     m_ConnSocket = INVALID_SOCKET;
 }

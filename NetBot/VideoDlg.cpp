@@ -152,10 +152,10 @@ DWORD CVideoDlg::RecvVideo()
     CAutoRelease a(hRecvVideoThread);
 
     MsgHead msgHead;
-    char chBuffer[256];
+    SafeBuffer chBuffer(256);
     //send socket type
     if (!RecvMsg(m_ConnSocket, chBuffer, &msgHead)) {
-        MessageBox("接收数据失败", "提示");
+        MessageBox("接收数据失败!", "提示");
         closesocket(m_ConnSocket);
         return 0;//send socket type error
     }
@@ -166,26 +166,26 @@ DWORD CVideoDlg::RecvVideo()
         Mprintf(">>> 摄像头启动成功，准备接收数据.\n");
         break;
     case 1: {
-        MessageBox("设备不存在或被其他程序占用", "提示");
+        MessageBox("设备不存在或被其他程序占用!", "提示");
         PostMessage(WM_COMMAND, IDCANCEL);
         return 0;
     }
     break;
     case 2: {
-        MessageBox("视频设备初始化失败", "提示");
+        MessageBox("视频设备初始化失败!", "提示");
         PostMessage(WM_COMMAND, IDCANCEL);
         return 0;
     }
     break;
     default: {
-        MessageBox("未知错误", "提示");
+        MessageBox("未知错误!", "提示");
         PostMessage(WM_COMMAND, IDCANCEL);
         return 0;
     }
     break;
     }
 
-    LPBITMAPINFO pBmpheader = LPBITMAPINFO(chBuffer);
+    LPBITMAPINFO pBmpheader = LPBITMAPINFO(chBuffer.c_str());
     CDC *dc = GetDC();
     BYTE *buffer = NULL;
     while (!m_bStop) {
@@ -343,7 +343,7 @@ void CVideoDlg::OnBtnRecords()
     strAVIName = dlgFileOpen.GetFileName();
 
     if (strAVIFile.IsEmpty()) {
-        MessageBox(_T("录像文件名称不能为空,开始录像失败"), _T("开始录像"), MB_ICONEXCLAMATION | MB_ICONERROR);
+        MessageBox(_T("录像文件名称不能为空,开始录像失败!"), _T("开始录像"), MB_ICONEXCLAMATION | MB_ICONERROR);
         return;
     }
 
@@ -352,7 +352,7 @@ void CVideoDlg::OnBtnRecords()
         delete m_pAviFile;
     m_pAviFile = new CAviFile(strAVIFile, 0, 5);
     if (!m_pAviFile) {
-        MessageBox(_T("新建视频录像文件失败"), _T("开始录像"), MB_ICONEXCLAMATION | MB_ICONERROR);
+        MessageBox(_T("新建视频录像文件失败!"), _T("开始录像"), MB_ICONEXCLAMATION | MB_ICONERROR);
     } else {
         StatusTextOut(0, _T("录制为文件 %s"), strAVIName);
         GetDlgItem(IDC_BTN_RECORDS)->EnableWindow(FALSE);

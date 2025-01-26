@@ -171,6 +171,7 @@
     <ClInclude Include="..\Seu_lib\FileOperator.h" />
     <ClInclude Include="..\Seu_lib\Functions.h" />
     <ClInclude Include="..\Seu_lib\Process.h" />
+    <ClInclude Include="..\Seu_lib\SafeBuffer.h" />
     <ClInclude Include="..\Seu_lib\SystemInfo.h" />
     <ClInclude Include="..\Seu_lib\VideoCap.h" />
     <ClInclude Include="..\Seu_lib\XScreenXor.h" />

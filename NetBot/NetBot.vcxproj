@@ -161,7 +161,7 @@
     <ClCompile Include="ServerDlg.cpp" />
     <ClCompile Include="SetDlg.cpp" />
     <ClCompile Include="ShellDlg.cpp" />
-    <ClCompile Include="SortList.cpp" />
+    <ClCompile Include="SortListCtrl.cpp" />
     <ClCompile Include="StdAfx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -199,7 +199,7 @@
     <ClInclude Include="ServerDlg.h" />
     <ClInclude Include="SetDlg.h" />
     <ClInclude Include="ShellDlg.h" />
-    <ClInclude Include="SortList.h" />
+    <ClInclude Include="SortListCtrl.h" />
     <ClInclude Include="StdAfx.h" />
     <ClInclude Include="UpdateDlg.h" />
     <ClInclude Include="VideoDlg.h" />

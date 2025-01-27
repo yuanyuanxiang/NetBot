@@ -109,7 +109,7 @@ BOOL CNetBotApp::InitInstance()
     m_pMainWnd = &dlg;
 
     /**********************************启动画面*****************************************************/
-
+    
     	pSplash=new CSplashScreenEx();
     	pSplash->Create(m_pMainWnd,NULL,CSS_FADE | CSS_CENTERSCREEN | CSS_SHADOW);
     	pSplash->SetBitmap(IDB_LOGO,255,0,255);
@@ -120,7 +120,7 @@ BOOL CNetBotApp::InitInstance()
     	pSplash->SetText("Lx_Attacker 6.0 Version");                  //设置文字
 
     	pSplash->Show();
-
+    
      //**********************************启动画面*****************************************************/
     // 	SkinH_AttachEx("Aero.she",NULL);
     // 	SkinH_SetAero(1);

@@ -706,6 +706,7 @@ int __stdcall ReadData(TCHAR szFile[], char **data)
 
 DWORD CNetBotDlg::AcceptSocket(SOCKET socket)
 {
+    CAutoLog a;
     if (socket != INVALID_SOCKET) {
         //…Ë÷√–ƒÃ¯
         TurnonKeepAlive(socket, 120);

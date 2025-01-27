@@ -172,6 +172,14 @@ typedef struct tagMsgHead {
     DWORD dwSize;      //数据长度   /数据长度
     DWORD dwExtend1;   //附加数据   /压缩前长度
     DWORD dwExtend2;   //附加数据   /压缩后长度
+    char dwFlag[8];    //固定标识   /NETBOT
+    tagMsgHead() {
+        memset(this, 0, sizeof(tagMsgHead));
+        memcpy(dwFlag, "NETBOT", sizeof("NETBOT"));
+    }
+    bool IsValid() const {
+        return memcmp(dwFlag, "NETBOT", sizeof("NETBOT")) == 0;
+    }
 } MsgHead,*LPMsgHead;
 
 //开启TCP保活机制

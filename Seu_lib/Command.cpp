@@ -124,7 +124,7 @@ BOOL SendMsg(SOCKET s, SafeBuffer pBuf, LPMsgHead lpMsgHead)
 BOOL RecvMsg(SOCKET s, SafeBuffer pBuf, LPMsgHead lpMsgHead)
 {
     //接收消息头
-    if (!RecvData(s, (char*)lpMsgHead, sizeof(MsgHead)))
+    if (!RecvData(s, (char*)lpMsgHead, sizeof(MsgHead)) || !lpMsgHead->IsValid())
         return FALSE;
 
     if (lpMsgHead->dwSize <= 0)

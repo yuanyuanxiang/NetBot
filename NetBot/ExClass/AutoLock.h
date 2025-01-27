@@ -44,4 +44,18 @@ private:
 	HANDLE& m_handle;
 };
 
+class CAutoLog
+{
+public:
+	CAutoLog()
+	{
+		Mprintf(">>> Enter thread[%d]: %p\n", GetCurrentThreadId(), GetCurrentThread());
+	}
+
+	~CAutoLog()
+	{
+		Mprintf(">>> Leave thread[%d]: %p\n", GetCurrentThreadId(), GetCurrentThread());
+	}
+};
+
 #endif

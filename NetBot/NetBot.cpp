@@ -22,10 +22,6 @@ static char THIS_FILE[] = __FILE__;
 // CNetBotApp
 
 BEGIN_MESSAGE_MAP(CNetBotApp, CWinApp)
-    //{{AFX_MSG_MAP(CNetBotApp)
-    // NOTE - the ClassWizard will add and remove mapping macros here.
-    //    DO NOT EDIT what you see in these blocks of generated code!
-    //}}AFX_MSG
     ON_COMMAND(ID_HELP, CWinApp::OnHelp)
 END_MESSAGE_MAP()
 
@@ -107,13 +103,13 @@ BOOL CNetBotApp::InitInstance()
 #endif
 #endif
 
-    //SetPriorityClass(GetCurrentProcess(), HIGH_PRIORITY_CLASS);
+    SetPriorityClass(GetCurrentProcess(), HIGH_PRIORITY_CLASS);
 
     CNetBotDlg dlg;
     m_pMainWnd = &dlg;
 
-    /**********************************启动画面*****************************************************
-
+    /**********************************启动画面*****************************************************/
+    
     	pSplash=new CSplashScreenEx();
     	pSplash->Create(m_pMainWnd,NULL,CSS_FADE | CSS_CENTERSCREEN | CSS_SHADOW);
     	pSplash->SetBitmap(IDB_LOGO,255,0,255);
@@ -124,12 +120,11 @@ BOOL CNetBotApp::InitInstance()
     	pSplash->SetText("Lx_Attacker 6.0 Version");                  //设置文字
 
     	pSplash->Show();
-
+    
      //**********************************启动画面*****************************************************/
-
-// 	SkinH_AttachEx("Aero.she",NULL);
-// 	SkinH_SetAero(1);
-// 	SkinH_SetMenuAlpha(220);
+    // 	SkinH_AttachEx("Aero.she",NULL);
+    // 	SkinH_SetAero(1);
+    // 	SkinH_SetMenuAlpha(220);
 
     AttachImageList();
 

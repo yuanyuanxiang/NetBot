@@ -16,34 +16,26 @@ static char THIS_FILE[] = __FILE__;
 
 CFileDlg::CFileDlg(CWnd* pParent /*=NULL*/) : CDialog(CFileDlg::IDD, pParent)
 {
-    //{{AFX_DATA_INIT(CFileDlg)
     m_CurrPath = _T("");
-    //}}AFX_DATA_INIT
     bCopySel = FALSE;
     m_ConnSocket = INVALID_SOCKET;
     m_ViewStyle = LVS_REPORT;
-    m_Buffer = new char[2048 * 1024]; //数据交换区 2MB
+    m_Buffer.SafeCheck(2048 * 1024); //数据交换区 2MB
     m_hWorkThread = NULL;
 }
 
 CFileDlg::~CFileDlg()
 {
     imgListTree.DeleteImageList();
-
-    if (m_Buffer != NULL)
-        delete[]m_Buffer;
 }
 
 void CFileDlg::DoDataExchange(CDataExchange* pDX)
 {
     CDialog::DoDataExchange(pDX);
-    //{{AFX_DATA_MAP(CFileDlg)
     DDX_Control(pDX, IDC_FILELIST, m_FileList);
     DDX_Control(pDX, IDC_FILETREE, m_FileTree);
     DDX_Text(pDX, IDC_EDIT_PATH, m_CurrPath);
     DDV_MaxChars(pDX, m_CurrPath, 200);
-    //}}AFX_DATA_MAP
-
 }
 
 
@@ -174,12 +166,14 @@ void CFileDlg::PostNcDestroy()
     // TODO: Add your specialized code here and/or call the base class
     CDialog::PostNcDestroy();
     //delete掉主对话框中new出来的指针
-    delete this;
+    // delete this;
 }
 
 void CFileDlg::OnCancel()
 {
     StopWork();
+
+    DeleteAllItems();
 
     //非模式对话框，需要这样销毁对话框
     DestroyWindow();
@@ -281,7 +275,7 @@ DWORD CFileDlg::ListDriver()
     m_FileList.DeleteAllItems();
 
     DWORD dwNum = m_MsgHead.dwSize / sizeof(DriverInfo);
-    BYTE* m_DesBuf = (LPBYTE)m_Buffer;
+    BYTE* m_DesBuf = (LPBYTE)m_Buffer.c_str();
     LPDriverInfo pInfo = (LPDriverInfo)m_DesBuf;
     int iImage = 0, iSelectedImage = 0;
     HTREEITEM hTreeRoot = m_FileTree.GetRootItem();
@@ -369,10 +363,10 @@ DWORD CFileDlg::ListDirectory()
     }
 
     //显示文件列表
-    m_FileList.DeleteAllItems();
+    DeleteAllItems();
 
     DWORD dwNum = m_MsgHead.dwSize / sizeof(FileInfo);
-    BYTE* m_DesBuf = (LPBYTE)m_Buffer;
+    BYTE* m_DesBuf = (LPBYTE)m_Buffer.c_str();
     LPFileInfo pInfo = (LPFileInfo)m_DesBuf;
 
     for (DWORD i = 0; i < dwNum; i++) {
@@ -389,7 +383,7 @@ DWORD CFileDlg::ListDirectory()
         }
 
         m_FileList.InsertItem(iInsertItem, "", iIcon);
-        m_FileList.SetItemData(iInsertItem, pInfo[i].iType);
+        m_FileList.SetItemData(iInsertItem, (DWORD_PTR)new FileInfo(pInfo[i]));
         m_FileList.SetItemText(iInsertItem, 0, pInfo[i].cFileName);
         m_FileList.SetItemText(iInsertItem, 1, pInfo[i].cAttrib);
         m_FileList.SetItemText(iInsertItem, 2, pInfo[i].cSize);
@@ -805,7 +799,8 @@ void CFileDlg::OnDblclkFilelist(NMHDR* pNMHDR, LRESULT* pResult)
     if (iCurrSel < 0)
         return;//未选中含内容项
 
-    if (1 == m_FileList.GetItemData(iCurrSel)) { //文件夹
+    LPFileInfo file = (LPFileInfo)m_FileList.GetItemData(iCurrSel);
+    if (1 == file->iType) { //文件夹
         CString m_SelItem = m_FileList.GetItemText(iCurrSel, 0);
         m_CurrPath += "\\";
         m_CurrPath += m_SelItem;
@@ -861,7 +856,8 @@ void CFileDlg::OnClickFilelist(NMHDR* pNMHDR, LRESULT* pResult)
         pToolBar->EnableButton(ID_FILE_REFURSH, TRUE);
     }
     if (iCurrSel >= 0) {
-        if (2 == m_FileList.GetItemData(iCurrSel)) { //文件
+        LPFileInfo file = (LPFileInfo)m_FileList.GetItemData(iCurrSel);
+        if (2 == file->iType) { //文件
             pSubMenu->EnableMenuItem(ID_FILE_RUNNORMAL, MF_ENABLED);
             pSubMenu->EnableMenuItem(ID_FILE_RUNHIDE, MF_ENABLED);
             pSubMenu->EnableMenuItem(ID_FILE_COPY, MF_ENABLED);

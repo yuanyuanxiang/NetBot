@@ -26,9 +26,7 @@ CCmdEdit::~CCmdEdit()
 
 
 BEGIN_MESSAGE_MAP(CCmdEdit, CEdit)
-    //{{AFX_MSG_MAP(CCmdEdit)
     ON_WM_CTLCOLOR_REFLECT()
-    //}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////

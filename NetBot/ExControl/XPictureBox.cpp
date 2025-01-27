@@ -25,11 +25,9 @@ XPictureBox::~XPictureBox()
 
 
 BEGIN_MESSAGE_MAP(XPictureBox, CWnd)
-    //{{AFX_MSG_MAP(XPictureBox)
     ON_WM_HSCROLL()
     ON_WM_VSCROLL()
     ON_WM_PAINT()
-    //}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 

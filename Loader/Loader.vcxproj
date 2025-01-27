@@ -48,15 +48,15 @@
     <CodeAnalysisRuleSet>Z:\Program Files (x86)\Microsoft Visual Studio 14.0\Team Tools\Static Analysis Tools\Rule Sets\NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <RunCodeAnalysis>false</RunCodeAnalysis>
     <IntDir>$(ProjectDir)$(Configuration)</IntDir>
-    <IncludePath>$(ProjectDir);$(SolutionDir)Seu_lib;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)Seu_lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir);$(SolutionDir)Seu_lib;$(VLDPATH)\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)Seu_lib;$(VLDPATH)\lib\$(Platform);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <CodeAnalysisRuleSet>Z:\Program Files (x86)\Microsoft Visual Studio 14.0\Team Tools\Static Analysis Tools\Rule Sets\NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <RunCodeAnalysis>false</RunCodeAnalysis>
     <IntDir>$(ProjectDir)$(Configuration)</IntDir>
-    <IncludePath>.;$(SolutionDir)Seu_lib;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)Seu_lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>.;$(SolutionDir)Seu_lib;$(VLDPATH)\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)Seu_lib;$(VLDPATH)\lib\$(Platform);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -64,15 +64,16 @@
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
       <StringPooling>true</StringPooling>
       <FunctionLevelLinking>true</FunctionLevelLinking>
-      <Optimization>MaxSpeed</Optimization>
+      <Optimization>MinSpace</Optimization>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AssemblerListingLocation>.\Release\</AssemblerListingLocation>
       <BrowseInformation>true</BrowseInformation>
-      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <EnablePREfast>false</EnablePREfast>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <WholeProgramOptimization>true</WholeProgramOptimization>
     </ClCompile>
     <Midl>
       <SuppressStartupBanner>true</SuppressStartupBanner>
@@ -90,7 +91,7 @@
     </Bscmake>
     <Link>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>No</GenerateDebugInformation>
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>

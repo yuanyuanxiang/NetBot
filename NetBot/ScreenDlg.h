@@ -62,6 +62,7 @@ protected:
     afx_msg void OnBtnSaveBmp();
 
     afx_msg void OnSelectScreenBytes(UINT nID);
+    afx_msg LRESULT OnUpdateProgress(WPARAM wParam, LPARAM lParam);
     DECLARE_MESSAGE_MAP()
 };
 

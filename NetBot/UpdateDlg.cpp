@@ -171,7 +171,7 @@ void CUpdateDlg::OnBtnDnsupdate()
     pHttpFile->Close();
     m_Session.Close();
 
-    MessageBox(strTemp, "3322 Domian");
+    MessageBox(strTemp, "3322 Domain");
 
     //保存配置信息
     m_Ini.SetKeyValue("DNS Setting", "DnsUser", m_DnsUser);
@@ -216,7 +216,7 @@ DWORD CUpdateDlg::FtpUpdate()
         if (pEx->GetErrorMessage(szError, 1024))
             MessageBox(szError, "FTP更新");
         else
-            MessageBox("There was an exception", "FTP更新");
+            MessageBox("出现未知异常!", "FTP更新");
         pEx->Delete();
 
         return 0;
@@ -225,7 +225,7 @@ DWORD CUpdateDlg::FtpUpdate()
     if (pFTP->PutFile("ip.txt", m_FtpUrl))
         MessageBox("更新IP成功!", "FTP更新");
     else
-        MessageBox("更新IP失败", "FTP更新");
+        MessageBox("更新IP失败!", "FTP更新");
 
     pFTP->Close();
 

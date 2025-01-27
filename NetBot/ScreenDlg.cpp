@@ -4,6 +4,7 @@
 #include "stdafx.h"
 #include "NetBot.h"
 #include "ScreenDlg.h"
+#include "ExClass/AutoLock.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -14,6 +15,8 @@ static char THIS_FILE[] = __FILE__;
 /////////////////////////////////////////////////////////////////////////////
 // CScreenDlg dialog
 
+#define WM_UPDATE_SCREEN_PROGRESS WM_USER + 0x3001
+
 CScreenDlg::CScreenDlg(CWnd* pParent /*=NULL*/)
     : CDialog(CScreenDlg::IDD, pParent)
 {
@@ -22,6 +25,7 @@ CScreenDlg::CScreenDlg(CWnd* pParent /*=NULL*/)
     m_bStop = FALSE;
     m_bCtrl = FALSE;
     m_Color = 8;
+    hRecvScreenThread = NULL;
 }
 
 void CScreenDlg::DoDataExchange(CDataExchange* pDX)
@@ -37,6 +41,7 @@ BEGIN_MESSAGE_MAP(CScreenDlg, CDialog)
     ON_BN_CLICKED(IDC_CHECK_CTRL, OnCheckCtrl)
     ON_BN_CLICKED(IDC_BTN_SAVEBMP, OnBtnSaveBmp)
     ON_COMMAND_RANGE(IDC_RADIO_COLOR1, IDC_RADIO_COLOR4, OnSelectScreenBytes)
+    ON_MESSAGE(WM_UPDATE_SCREEN_PROGRESS, OnUpdateProgress)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -103,7 +108,7 @@ void CScreenDlg::PostNcDestroy()
 {
     // TODO: Add your specialized code here and/or call the base class
     CDialog::PostNcDestroy();
-    delete this;
+    // delete this;
 }
 
 void CScreenDlg::OnCancel()
@@ -131,6 +136,8 @@ void CScreenDlg::OnSize(UINT nType, int cx, int cy)
 
 DWORD CScreenDlg::RecvScreen()
 {
+    CAutoRelease a(hRecvScreenThread);
+
     //设置发送缓冲区,有利于屏幕传输
     int rcvbuf = 65536; //64KB
     int rcvbufsize = sizeof(int);
@@ -166,7 +173,6 @@ DWORD CScreenDlg::RecvScreen()
             //按该帧数据实际长度接受该帧数据
             int iRecvLen = 0;
             int iRecved;
-            m_Progress.SetRange(0, (short)msgHead.dwSize);//进度条
             while (iRecvLen < (int)msgHead.dwSize) {
                 if ((msgHead.dwSize - iRecvLen) >= BUFFER_MAXLEN) {
                     iRecved = recv(m_ConnSocket, (char*)pCompress + iRecvLen, BUFFER_MAXLEN, 0);
@@ -182,7 +188,7 @@ DWORD CScreenDlg::RecvScreen()
                     }
                 }
                 iRecvLen += iRecved;
-                m_Progress.SetPos(iRecvLen);
+                PostMessage(WM_UPDATE_SCREEN_PROGRESS, iRecvLen, msgHead.dwSize); // 发送进度条更新消息
             }
             /////////////////////////////////////////////
             DWORD lenthUncompress = msgHead.dwExtend1;
@@ -215,17 +221,8 @@ void CScreenDlg::ScreenStop()
     //因为屏幕用的单独的socket，所以这里要关闭
     shutdown(m_ConnSocket, 0x02);
     closesocket(m_ConnSocket);
-    //结束线程
-    DWORD dwExitCode;
-    if (hRecvScreenThread != NULL) {
-        WaitForSingleObject(hRecvScreenThread, 200);
-        if (GetExitCodeThread(hRecvScreenThread, &dwExitCode)) {
-            if (dwExitCode == STILL_ACTIVE) {
-                TerminateThread(hRecvScreenThread, dwExitCode);
-            }
-        }
-        hRecvScreenThread = NULL;
-    }
+	// 等待线程结束
+	WAIT_CONDITION(hRecvScreenThread);
 }
 
 void CScreenDlg::OnBtnStart()
@@ -390,4 +387,20 @@ void CScreenDlg::OnBtnSaveBmp()
         return;
 
     m_PicBox.SaveBmp(FileSavePath);
+}
+
+// wParam: currentProgress, lParam: maxProgress
+LRESULT CScreenDlg::OnUpdateProgress(WPARAM wParam, LPARAM lParam)
+{
+	// 接收到来自工作线程的进度更新消息
+	int currentProgress = (int)wParam;
+	int maxProgress = (int)lParam;
+
+	if (m_Progress.GetSafeHwnd())  // 检查进度条控件是否有效
+	{
+		m_Progress.SetRange(0, maxProgress); // 设置进度条范围
+		m_Progress.SetPos(currentProgress);  // 设置当前进度
+	}
+
+	return 0;
 }

@@ -29,6 +29,8 @@
 #include <winsock2.h>
 #pragma comment (lib,"ws2_32.lib")
 
+#include <vector>
+
 //#include "start.h"
 
 typedef struct tagAutoAttack {
@@ -45,6 +47,8 @@ class CNetBotDlg : public CDialog
 {
 // Construction
 public:
+    std::vector<CDialog*> m_DialogList; // 打开的对话框列表
+
     CNetBotDlg(CWnd* pParent = NULL);	// standard constructor
 
     CRITICAL_SECTION m_cs;

@@ -49,7 +49,7 @@ protected:
     BOOL VideoStart();
     void VideoStop();
 
-    HBITMAP GetBitmapFromData(LPBITMAPINFO lpBmpInfo, BYTE* pDibData);
+    HBITMAP GetBitmapFromData(HDC hDC, LPBITMAPINFO lpBmpInfo, BYTE* pDibData, BYTE** buffer);
 
 // Implementation
 protected:
@@ -59,6 +59,7 @@ protected:
     afx_msg void OnSize(UINT nType, int cx, int cy);
     afx_msg void OnBtnRecords();
     afx_msg void OnBtnRecorde();
+    afx_msg LRESULT OnUpdateProgress(WPARAM wParam, LPARAM lParam);
     DECLARE_MESSAGE_MAP()
 };
 

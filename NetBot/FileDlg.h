@@ -8,7 +8,7 @@
 //
 #include "ExControl/TrueColorToolBar.h"
 #include "../Seu_lib/Command.h"
-#include "SortList.h"
+#include "SortListCtrl.h"
 
 #include <winsock.h>
 /////////////////////////////////////////////////////////////////////////////
@@ -44,7 +44,7 @@ protected:
     SOCKET  m_ConnSocket;
 
     MsgHead m_MsgHead;           //消息头
-    char  * m_Buffer;            //数据缓冲区
+    SafeBuffer m_Buffer;         //数据缓冲区
 
     CString m_SendPath;
     UINT    m_ViewStyle;
@@ -65,6 +65,14 @@ protected:
 
     void GetRootDrivers();
     void StopWork();
+    void DeleteAllItems() {
+		for (int i = 0, n = m_FileList.GetItemCount(); i < n; i++)
+		{
+			LPFileInfo file = (LPFileInfo)m_FileList.GetItemData(i);
+			delete file;
+		}
+		m_FileList.DeleteAllItems();
+    }
 protected:
     CTrueColorToolBar m_wndToolBar;
     CStatusBarCtrl    m_wndStatusBar;

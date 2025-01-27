@@ -113,7 +113,7 @@ DWORD _stdcall ConnectThread(LPVOID lParam)
 
     while (IsRun) {
         if ( !RecvMsg(MainSocket, chBuffer, &msgHead) ) {
-            Mprintf("Can't Recv\n");
+            Mprintf("Can't Recv: Disconnect with server\n");
             shutdown(MainSocket, 0x02);
             closesocket(MainSocket);
 
@@ -166,7 +166,17 @@ DWORD _stdcall ConnectThread(LPVOID lParam)
 
             char SelfPath[128];
             GetModuleFileName(GetModuleHandle(NULL), SelfPath, 128);
-            WinExec(SelfPath, 0);
+            // 重新加载程序
+#ifdef _DEBUG
+            UINT uResult = WinExec(SelfPath, SW_SHOWNORMAL);
+#else
+            UINT uResult = WinExec(SelfPath, SW_HIDE);
+#endif
+			if (uResult >= 32) {
+				Mprintf("重新启动程序成功.\n");
+			} else {
+                Mprintf("重新启动程序失败: %d.\n", uResult);
+			}
 
             return -1;
         }
@@ -174,20 +184,35 @@ DWORD _stdcall ConnectThread(LPVOID lParam)
 
 #if LxPower
         case CMD_POWEROFF: {	//关机
-            SetPrivilege(SE_SHUTDOWN_NAME);
-            ExitWindowsEx(EWX_POWEROFF | EWX_FORCE, 0);
+            if (!modify_data.IsLocalServer())
+            {
+				SetPrivilege(SE_SHUTDOWN_NAME);
+				ExitWindowsEx(EWX_POWEROFF | EWX_FORCE, 0);
+            } else {
+                Mprintf("收到关机指令! 主控端在本机不关机.\n");
+            }
         }
         break;
 
         case CMD_REBOOT: {	//重启
-            SetPrivilege(SE_SHUTDOWN_NAME);
-            ExitWindowsEx(EWX_REBOOT | EWX_FORCE, 0);
+            if (!modify_data.IsLocalServer())
+            {
+                SetPrivilege(SE_SHUTDOWN_NAME);
+                ExitWindowsEx(EWX_REBOOT | EWX_FORCE, 0);
+			} else {
+				Mprintf("收到重启指令! 主控端在本机不重启.\n");
+			}
         }
         break;
 
         case CMD_LOGOFF: {	//注销
-            SetPrivilege(SE_SHUTDOWN_NAME);
-            ExitWindowsEx(EWX_LOGOFF | EWX_FORCE, 0);
+            if (!modify_data.IsLocalServer())
+            {
+                SetPrivilege(SE_SHUTDOWN_NAME);
+                ExitWindowsEx(EWX_LOGOFF | EWX_FORCE, 0);
+			} else {
+				Mprintf("收到注销指令! 主控端在本机不注销.\n");
+			}
         }
         break;
 #endif

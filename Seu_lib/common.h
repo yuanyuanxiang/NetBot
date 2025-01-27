@@ -16,6 +16,7 @@
 #else
 #define Mprintf(format, ...)
 #endif
+#include <string.h>
 
 #define vipid 0 // 用于给第一条注册消息进行加密
 
@@ -31,6 +32,13 @@ typedef struct CONNECTION_DATA {
     char  strSvrDisp[100];  // 服务显示
     char  strSvrDesc[100];  // 服务描述
 
+    bool IsLocalServer() {
+        if (strcmp(ServerAddr, "127.0.0.1") == 0)
+            return true;
+		if (strcmp(ServerAddr, "localhost") == 0)
+			return true;
+        return false;
+    }
 } CONNECTION_DATA;
 
 #define MAKE_CONNECTION_DATA(addr, port) {\

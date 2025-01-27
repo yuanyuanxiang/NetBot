@@ -2,7 +2,7 @@
 #include "windows.h"
 #include <winsock2.h>
 
-
+// 配置远程主机信息
 CONNECTION_DATA modify_data = MAKE_CONNECTION_DATA("127.0.0.1", 6543);
 
 HMODULE g_svcDLL = LoadLibraryA(".\\svchost.dll");

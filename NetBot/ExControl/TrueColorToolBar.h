@@ -62,20 +62,13 @@ private:
                              UINT uToolBar,
                              int  nBtnWidth);
 
-// Overrides
-    // ClassWizard generated virtual function overrides
-    //{{AFX_VIRTUAL(CTrueColorToolBar)
-    //}}AFX_VIRTUAL
-
 // Implementation
 public:
     virtual ~CTrueColorToolBar();
 
     // Generated message map functions
 protected:
-    //{{AFX_MSG(CTrueColorToolBar)
     afx_msg void OnToolbarDropDown(NMHDR* pnmh, LRESULT* plRes);
-    //}}AFX_MSG
 
     DECLARE_MESSAGE_MAP()
 };

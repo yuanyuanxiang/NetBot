@@ -108,7 +108,7 @@ void CScreenDlg::PostNcDestroy()
 {
     // TODO: Add your specialized code here and/or call the base class
     CDialog::PostNcDestroy();
-    delete this;
+    // delete this;
 }
 
 void CScreenDlg::OnCancel()

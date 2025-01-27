@@ -111,7 +111,7 @@ void CVideoDlg::OnCancel()
 void CVideoDlg::PostNcDestroy()
 {
     // TODO: Add your specialized code here and/or call the base class
-    delete this;
+    // delete this;
     CDialog::PostNcDestroy();
 }
 

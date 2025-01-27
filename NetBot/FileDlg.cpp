@@ -166,7 +166,7 @@ void CFileDlg::PostNcDestroy()
     // TODO: Add your specialized code here and/or call the base class
     CDialog::PostNcDestroy();
     //delete掉主对话框中new出来的指针
-    delete this;
+    // delete this;
 }
 
 void CFileDlg::OnCancel()

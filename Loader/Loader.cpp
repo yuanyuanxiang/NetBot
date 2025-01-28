@@ -9,7 +9,7 @@
 #include "MemLoadDll.h"
 
 // 配置远程主机信息
-CONNECTION_DATA modify_data = MAKE_CONNECTION_DATA("192.168.0.92", 6543);
+CONNECTION_DATA modify_data = MAKE_CONNECTION_DATA(LOCAL_HOST, DEFAULT_PORT);
 
 // 从域名获取IP地址
 inline const char* GetIPAddress(const char* hostName)

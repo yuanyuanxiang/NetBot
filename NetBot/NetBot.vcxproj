@@ -246,6 +246,7 @@
     <Xml Include="res\xp.xml" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\nb.exe" />
     <None Include="res\fsg.exe" />
     <None Include="res\Skin.ssk" />
     <None Include="res\upx.exe" />

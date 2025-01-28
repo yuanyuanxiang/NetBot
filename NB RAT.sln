@@ -12,7 +12,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "svchost", "svchost\svchost.
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NetBot", "NetBot\NetBot.vcxproj", "{F44D3B0A-BC73-47C5-82A2-AA8D98E257CE}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7DA39D67-016D-4F2C-8D7D-13A1290BBF3B}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ReadMe", "ReadMe", "{7DA39D67-016D-4F2C-8D7D-13A1290BBF3B}"
 	ProjectSection(SolutionItems) = preProject
 		ReadMe.md = ReadMe.md
 	EndProjectSection

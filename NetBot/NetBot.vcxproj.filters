@@ -289,5 +289,6 @@
     <None Include="res\Skin.ssk" />
     <None Include="res\fsg.exe" />
     <None Include="res\upx.exe" />
+    <None Include="..\nb.exe" />
   </ItemGroup>
 </Project>

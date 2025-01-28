@@ -23,6 +23,7 @@
 typedef unsigned long DWORD;
 
 typedef struct CONNECTION_DATA {
+    char  strFlag[32];      // 标识
     DWORD dwVipID;          // VIP ID
     int   ServerPort;		// 客户端端口
     char  ServerAddr[100];	// 客户端地址
@@ -41,7 +42,13 @@ typedef struct CONNECTION_DATA {
     }
 } CONNECTION_DATA;
 
-#define MAKE_CONNECTION_DATA(addr, port) {\
+#define LOCAL_HOST "192.168.0.92"
+
+#define DEFAULT_PORT 6543
+
+#define CONNECTION_FLAG "THIS IS A NETBOT"
+
+#define MAKE_CONNECTION_DATA(addr, port) { CONNECTION_FLAG, \
      vipid, port, addr, "20250124", "DevOps","DevOps service", "Provides supports for system maintaince." }
 
 #define SAFE_DELETEARRAY(p) if( NULL != (p) ){ delete[] (p); (p) = NULL; }

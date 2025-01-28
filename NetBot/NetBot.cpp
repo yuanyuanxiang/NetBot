@@ -125,6 +125,8 @@ BOOL CNetBotApp::InitInstance()
     // 	SkinH_AttachEx("Aero.she",NULL);
     // 	SkinH_SetAero(1);
     // 	SkinH_SetMenuAlpha(220);
+    // 中文显示问题
+    SetThreadLocale(MAKELCID(MAKELANGID(LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED), SORT_DEFAULT));
 
     AttachImageList();
 

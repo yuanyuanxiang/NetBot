@@ -30,8 +30,8 @@ typedef struct tagSocketInput {
 CNetBotDlg::CNetBotDlg(CWnd* pParent /*=NULL*/)
     : CDialog(CNetBotDlg::IDD, pParent)
 {
-    m_ExecUrl = _T("http://www.a.com/nb.exe");
-    m_OpenUrl = _T("http://www.a.com/index.html");
+    m_ExecUrl = _T("http://path.of.the.executable.file");
+    m_OpenUrl = _T("https://path.of.the.website.url");
     m_SelNum = 100;
     // Note that LoadIcon does not require a subsequent DestroyIcon in Win32
     m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);

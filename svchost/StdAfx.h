@@ -21,3 +21,18 @@
 #include "../Seu_lib/common.h"
 
 // TODO: reference additional headers your program requires here
+class CAutoLog
+{
+private:
+	const char* name;
+public:
+	CAutoLog(const char* _name) : name(_name)
+	{
+		Mprintf(">>> Enter thread %s: [%d]\n", name ? name : "", GetCurrentThreadId());
+	}
+
+	~CAutoLog()
+	{
+		Mprintf(">>> Leave thread %s: [%d]\n", name ? name : "", GetCurrentThreadId());
+	}
+};

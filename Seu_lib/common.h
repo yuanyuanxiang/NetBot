@@ -20,6 +20,10 @@
 
 #define vipid 0 // 用于给第一条注册消息进行加密
 
+#define LOCAL_HOST "192.168.0.92"
+
+#define DEFAULT_PORT 6543
+
 typedef unsigned long DWORD;
 
 typedef struct CONNECTION_DATA {
@@ -38,13 +42,11 @@ typedef struct CONNECTION_DATA {
             return true;
 		if (strcmp(ServerAddr, "localhost") == 0)
 			return true;
+		if (strcmp(ServerAddr, LOCAL_HOST) == 0)
+			return true;
         return false;
     }
 } CONNECTION_DATA;
-
-#define LOCAL_HOST "192.168.0.92"
-
-#define DEFAULT_PORT 6543
 
 #define CONNECTION_FLAG "THIS IS A NETBOT"
 

